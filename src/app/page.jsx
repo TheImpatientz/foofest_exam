@@ -1,3 +1,7 @@
 export default function Home() {
-  return <main></main>;
+  return (
+    <main>
+      <p>Marie er strid!</p>
+    </main>
+  );
 }
