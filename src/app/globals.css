@@ -6,22 +6,38 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --accent-color: #c5ef1a;
+  --primary-color: #333131;
+  --secondary-color: #f6f1f1;
+  --border-regular: 1px;
+  --border-picked: 4px;
+  --border-color: #c5ef1a;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--primary-color);
+}
+/* Fonte */
+h1 {
+  font-family: "Ibarra Real Nova", serif;
+  font-style: italic;
+  font-size: 8rem;
+  color: var(--accent-color);
+}
+h2 {
+  font-size: 4rem;
+  color: var(--secondary-color);
+}
+h3 {
+  font-size: 3rem;
+  font-family: "Ibarra Real Nova", serif;
+  font-style: italic;
+  color: var(--secondary-color);
+}
+h4 {
+  font-size: 1rem;
+  color: var(--secondary-color);
+}
+p {
+  font-size: 1rem;
+  color: var(--secondary-color);
 }
