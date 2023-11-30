@@ -7,7 +7,7 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   --accent-color: #c5ef1a;
-  --primary-color: #333131;
+  --primary-color: #292d32;
   --secondary-color: #f6f1f1;
   --border-regular: 1px;
   --border-picked: 4px;
@@ -40,4 +40,8 @@ h4 {
 p {
   font-size: 1rem;
   color: var(--secondary-color);
+}
+
+.newsletter_p {
+  font-family: "Ibarra Real Nova", serif;
 }
