@@ -1,9 +1,13 @@
+import Header from "@/components/Header";
 import Link from "@/components/Link";
 
 export default function Home() {
   return (
-    <main>
-      <p>hello</p>
-    </main>
+    <>
+      <Header />
+      <main>
+        <p>hello</p>
+      </main>
+    </>
   );
 }
