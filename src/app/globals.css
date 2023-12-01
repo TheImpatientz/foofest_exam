@@ -32,11 +32,9 @@ h3 {
   color: var(--secondary-color);
 }
 h4 {
-  font-size: 1rem;
   color: var(--secondary-color);
 }
 p {
-  font-size: 1rem;
   color: var(--secondary-color);
 }
 a {
@@ -46,13 +44,21 @@ a {
   font-family: "Ibarra Real Nova", serif;
 }
 
+/* Mobil */
 @media (max-width: 768px) {
   body {
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  h4 {
+    font-size: 1.3rem;
   }
 }
 
+/* Desktop */
 @media (min-width: 768px) {
   body {
     margin-left: 1.5rem;
@@ -61,5 +67,11 @@ a {
   main {
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+  p {
+    font-size: 1.125rem;
+  }
+  h4 {
+    font-size: 1.5rem;
   }
 }
