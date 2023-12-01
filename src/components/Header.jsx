@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header className="p-3 md:p-5 flex justify-between">
+    <header className=" flex justify-between">
       <a href="/">
         {" "}
         <svg className="md:h-28 md:w-28" width="57" height="57" viewBox="0 0 113 112" fill="none" xmlns="http://www.w3.org/2000/svg">
