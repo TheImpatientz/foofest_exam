@@ -4,11 +4,6 @@ import Header from "@/components/Header";
 
 export default function Home() {
   return (
-<<<<<<< HEAD
-    <main>
-      <p>Marie er strid!</p>
-    </main>
-=======
     <>
       <Header></Header>
       <main>
@@ -16,6 +11,5 @@ export default function Home() {
       </main>
       <Footer></Footer>
     </>
->>>>>>> a83b76050bae62922f91ee2eb9be22355a5f4dc2
   );
 }
