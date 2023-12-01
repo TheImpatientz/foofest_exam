@@ -1,14 +1,11 @@
-import PrimaryButton from "@/app/PrimaryButton";
-import SecondaryButton from "@/app/SecondaryButton";
-import CheckoutButton from "./CheckoutButton";
+import Footer from "@/components/Footer";
+// import Header from "@/components/Header";
+// import Link from "@/components/Link";
 
 export default function Home() {
   return (
     <main>
       <p>Marie er strid!</p>
-      <PrimaryButton />
-      <SecondaryButton />
-      <CheckoutButton />
     </main>
   );
 }
