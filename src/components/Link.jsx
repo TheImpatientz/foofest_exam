@@ -1,8 +1,7 @@
-//Module css importeret, men bliver kun benyttet hvis der eksisterer en "dark" prop
-//Dette er fordi alle links er som standard secondary-color, men med dark bliver det lavet om til primary-color i module css (til burger menu)
 import style from "@/components/Link.module.css";
 
-//Komponentet skal have en size og en href. size kan være enten "big" eller "small"
+//Komponentet skal have en size og en href. size kan være enten "big" eller "small" (big til burger-menu og small til footer)
+//Hvis linket skal være i vores primary color (mørk), skal color tilføjes og sættes til "dark"
 export default function Link({ text, size, color, href }) {
   const linkSize = size === "big" ? "md:text-7xl" : size === "small" ? "text-base" : "";
   const deskBigSize = size === "big" ? "text-3xl" : "";
@@ -13,5 +12,3 @@ export default function Link({ text, size, color, href }) {
     </a>
   );
 }
-
-//hover:underline

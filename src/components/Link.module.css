@@ -2,7 +2,7 @@
 .a {
   display: block;
   position: relative;
-  /*overflow:hidden skjuler stregen før brugeren hover focus */
+  /*overflow:hidden skjuler stregen før brugeren hover / focus */
   overflow: hidden;
   width: fit-content;
   /*padding top og buttom til at få nedhængende bogstaver (g) til ikke at blive cuttet af */
@@ -18,7 +18,9 @@
   height: 1px;
   background-color: var(--secondary-color);
   opacity: 1;
+  /* translate3d flytter elementet i (x, y, z) retning */
   transform: translate3d(-100%, 0, 0);
+  /* laver transition af stregen, og tager 600ms at dukke op */
   transition: opacity 600ms, transform 600ms;
 }
 
