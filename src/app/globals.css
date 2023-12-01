@@ -45,3 +45,21 @@ a {
 .newsletter_p {
   font-family: "Ibarra Real Nova", serif;
 }
+
+@media (max-width: 768px) {
+  body {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+  main {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
