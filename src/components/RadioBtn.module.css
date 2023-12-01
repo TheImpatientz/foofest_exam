@@ -1,0 +1,26 @@
+/* .radio er givet til vores input felt. Her fjernes der default styling og tilføjes nyt */
+.radio {
+  appearance: none;
+  background-color: transparent;
+  border: 1px solid var(--accent-color);
+  border-radius: 1em;
+  display: inline-block;
+  cursor: pointer;
+}
+.radio:hover {
+  background-color: var(--accent-color);
+}
+.radio:checked {
+  background-color: var(--accent-color);
+}
+/* Tilføjer et kryds, hvis denne klasse er givet */
+.disabled {
+  background: url("../logo/disabled.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%, auto;
+}
+/* Hvis input er disabled, så skal der ikke ske noget ved hover i input */
+.disabled:hover .radio:hover {
+  background-color: transparent;
+}
