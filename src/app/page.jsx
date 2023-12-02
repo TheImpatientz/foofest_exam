@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HeaderTwo from "@/components/HeaderTwo";
 import Labelinput from "@/components/Labelinput";
+import ProgramItem from "@/components/ProgramItem";
 import SecondaryButton from "@/components/SecondaryButton";
 import YourPurchase from "@/components/YourPurchase";
 // import Link from "@/components/Link";
