@@ -14,10 +14,8 @@ export default function Home() {
     <>
       <Header></Header>
       <main>
-        <HeaderTwo page="Program" />
-        <SecondaryButton />
-        <ProgramContent />
-        <YourPurchase campingspot="MUSPELHEIM"></YourPurchase>
+        <Labelinput id="name" inputname="name" label="Name" placeholder="navn navnsen" type="text" forId="name" />
+        <Dob />
       </main>
       <Footer></Footer>
     </>
