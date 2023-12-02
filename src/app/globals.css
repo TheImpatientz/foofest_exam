@@ -23,7 +23,6 @@ h1 {
   color: var(--accent-color);
 }
 h2 {
-  font-size: 4rem;
   color: var(--secondary-color);
   font-weight: 400;
 }
@@ -60,6 +59,9 @@ a {
     margin-left: 1.25rem;
     margin-right: 1.25rem;
   }
+  h2 {
+    font-size: 2rem;
+  }
   p {
     font-size: 1rem;
   }
@@ -77,6 +79,9 @@ a {
   main {
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+  h2 {
+    font-size: 3rem;
   }
   p {
     font-size: 1.125rem;
