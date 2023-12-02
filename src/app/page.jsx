@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <Header></Header>
       <main>
-        <HeaderTwo />
+        <HeaderTwo page="Program" />
         <SecondaryButton />
         <YourPurchase campingspot="MUSPELHEIM"></YourPurchase>
       </main>
