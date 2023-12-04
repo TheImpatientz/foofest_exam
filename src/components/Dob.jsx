@@ -9,6 +9,7 @@ export default function Dob() {
   function changeFocus(e) {
     //Hvis den maksimale længde er nået, skal focus gå til næste felt. Den bliver kaldt når der sker ændringer i feltet
     if (e.target.value.length == e.target.maxLength) {
+      //Her spørg vi om det er day input der har kaldt funktionen eller month
       if (e.target.name === "day") {
         //Her tages der fat i monthRef's current, hvilket er i lig med det dom element den er sat på. Så her er det months's inputfelt.
         //Der sættes focus på month
