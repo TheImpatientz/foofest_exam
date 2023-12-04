@@ -3,8 +3,8 @@ import Link from "./Link";
 
 export default function Footer() {
   return (
-    <>
-      <div className="grid grid-rows-3 w-4/5 ml-auto mr-auto md:w-auto md:grid-rows-1 md:grid-cols-[auto]">
+    <footer>
+      <div className="relative grid grid-rows-3 w-4/5 ml-auto mr-auto md:w-auto md:grid-rows-1 md:grid-cols-[auto]">
         <Newsletter></Newsletter>
         <div className="mt-auto mb-auto md:col-start-3 md:mt-2 md:ml-6 md:mr-auto md:ml-auto">
           <p className="font-semibold">FOOFEST</p>
@@ -30,6 +30,6 @@ export default function Footer() {
         </div>
       </div>{" "}
       <p className="grid place-items-center text-xs mt-10 md:mt-20">©This is a school project 2023/2024</p>
-    </>
+    </footer>
   );
 }

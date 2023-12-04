@@ -53,6 +53,10 @@ a {
   font-family: "Ibarra Real Nova", serif;
 }
 
+/* .landingimg {
+  background-image: url("../img/landingimg.jpg");
+} */
+
 /* Mobil */
 @media (max-width: 768px) {
   body {
