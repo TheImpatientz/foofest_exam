@@ -1,3 +1,7 @@
+{
+  /*props: <Labelinput id="name" inputname="name" label="Name" placeholder="navn navnsen" type="text" forId="name" /> */
+}
+
 export default function Labelinput({ id, inputname, label, placeholder, type, forId }) {
   return (
     <div className="flex flex-col my-6 max-w-lg">
