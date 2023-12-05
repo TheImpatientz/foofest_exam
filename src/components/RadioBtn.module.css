@@ -13,6 +13,10 @@
 .radio:checked {
   background-color: var(--accent-color);
 }
+/* .checked {
+  border: 1px solid var(--accent-color);
+} */
+
 /* Tilføjer et kryds, hvis denne klasse er givet */
 .disabled {
   background: url("../logo/disabled.svg");
