@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import HeaderTwo from "@/components/HeaderTwo";
 import Labelinput from "@/components/Labelinput";
 import Layout from "@/components/Layout";
+import PrimaryButton from "@/components/PrimaryButton";
 import ProgramContent from "@/components/ProgramContent";
 import ProgramItem from "@/components/ProgramItem";
 import SecondaryButton from "@/components/SecondaryButton";
@@ -16,6 +17,7 @@ export default function Home() {
       <Layout>
         <Labelinput id="name" inputname="name" label="Name" placeholder="navn navnsen" type="text" forId="name" />
         <Dob />
+        <PrimaryButton />
       </Layout>
     </>
   );
