@@ -1,6 +1,6 @@
 export default function YourPurchase({ campingspot }) {
   return (
-    <div className="border border-[var(--accent-color)] p-7 font-semibold">
+    <div className="outline outline-[var(--accent-color)] p-7 font-semibold">
       <h4 className="pb-9">YOUR PURCHASE</h4>
       <p className="grid place-items-center border-b border-[var(--accent-color)] pb-1">{campingspot}</p>
       <div className="flex justify-between pt-7 pb-7">
