@@ -25,14 +25,22 @@ export default function Dob() {
         <label className="text-[var(--secondary-color)] w-fit semibold" htmlFor="day">
           DAY
         </label>
-        <input className="w-full bg-[var(--primary-color)] outline-none text-[var(--secondary-color)] p-4 border focus:border-[3px] border-[var(--accent-color)]" id="day" placeholder="dd" name="day" type="text" maxLength="2" onChange={changeFocus} />
+        <input
+          className="w-full bg-[var(--primary-color)] outline-none text-[var(--secondary-color)] p-4 outline focus:outline-[3px] outline-[var(--accent-color)]"
+          id="day"
+          placeholder="dd"
+          name="day"
+          type="text"
+          maxLength="2"
+          onChange={changeFocus}
+        />
       </div>
       <div className="flex flex-col shrink my-6 w-1/4">
         <label className="text-[var(--secondary-color)] w-fit semibold" htmlFor="month">
           MONTH
         </label>
         <input
-          className="w-full bg-[var(--primary-color)] outline-none text-[var(--secondary-color)] p-4 border focus:border-[3px] border-[var(--accent-color)]"
+          className="w-full bg-[var(--primary-color)] outline-none text-[var(--secondary-color)] p-4 outline focus:outline-[3px] outline-[var(--accent-color)]"
           id="month"
           placeholder="mm"
           name="month"
@@ -46,7 +54,7 @@ export default function Dob() {
         <label className="text-[var(--secondary-color)] w-fit semibold" htmlFor="year">
           YEAR
         </label>
-        <input className="w-full bg-[var(--primary-color)] outline-none text-[var(--secondary-color)] p-4 border focus:border-[3px] border-[var(--accent-color)]" id="year" placeholder="yyyy" name="year" type="text" maxLength="4" ref={yearRef} />
+        <input className="w-full bg-[var(--primary-color)] outline-none text-[var(--secondary-color)] p-4 outline focus:outline-[3px] outline-[var(--accent-color)]" id="year" placeholder="yyyy" name="year" type="text" maxLength="4" ref={yearRef} />
       </div>
     </div>
   );
