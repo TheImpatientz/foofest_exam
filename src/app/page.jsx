@@ -10,6 +10,7 @@ import ProgramItem from "@/components/ProgramItem";
 import SecondaryButton from "@/components/SecondaryButton";
 import YourPurchase from "@/components/YourPurchase";
 import Plusminus from "@/components/plusminus";
+import Link from "next/link";
 
 // import Link from "@/components/Link";
 
@@ -21,6 +22,7 @@ export default function Home() {
         <Labelinput id="name" inputname="name" label="Name" placeholder="navn navnsen" type="text" forId="name" />
         <Dob />
         <PrimaryButton />
+        <Link href="/program">klik her</Link>
       </Layout>
     </>
   );
