@@ -50,7 +50,7 @@ export default function Header() {
         </svg>
       </a>
 
-      <div className="flex items-center">
+      <div className="flex items-center h-fit">
         <svg className="md:h-12 md:w-12 cursor-pointer" width="35" height="35" viewBox="0 0 53 52" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M26.6129 25.8122C31.3503 25.8122 35.1875 21.9751 35.1875 17.2377C35.1875 12.5002 31.3503 8.66309 26.6129 8.66309C21.8754 8.66309 18.0383 12.5002 18.0383 17.2377C18.0383 21.9751 21.8754 25.8122 26.6129 25.8122ZM26.6129 30.0995C20.8894 30.0995 9.46375 32.972 9.46375 38.6741V42.9614H43.762V38.6741C43.762 32.972 32.3364 30.0995 26.6129 30.0995Z"
