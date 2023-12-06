@@ -1,6 +1,15 @@
+"use client";
+import { Fade as Hamburger } from "hamburger-react";
+import { useState } from "react";
+import OurLink from "./OurLink";
+
+//Burgermenu icon + animation installeret fra https://hamburger-react.netlify.app (installeret 5/12/23)
+
 export default function Header() {
+  const [isOpen, setOpen] = useState(false);
+  const color = isOpen ? "#292d32" : "#f6f1f1";
   return (
-    <header className=" flex justify-between mb-2">
+    <header className={`flex justify-between mb-2 relative ${isOpen && "fixed"}`}>
       <a href="/">
         {" "}
         <svg className="md:h-28 md:w-28" width="57" height="57" viewBox="0 0 113 112" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,13 +57,29 @@ export default function Header() {
           />
         </svg>
 
-        {/* her skal burger menuen være i stedet for nedestående svg */}
-        <svg className="md:h-12 md:w-12 cursor-pointer mt-1" width="43" height="25" viewBox="0 0 43 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0.586792" y="0.47168" width="41.8194" height="5.90874" fill="#F6F1F1" />
-          <rect x="0.586792" y="10.812" width="41.8194" height="5.90874" fill="#F6F1F1" />
-          <rect x="0.586792" y="21.1523" width="41.8194" height="5.90874" fill="#F6F1F1" />
-        </svg>
+        <div className={`z-20 ${isOpen && "fixed right-0"}`}>
+          <Hamburger toggled={isOpen} toggle={setOpen} color={color} />
+        </div>
       </div>
+
+      <nav className={` ${isOpen ? "" : "translate-x-full"} flex items-center justify-center fixed top-0 right-0 transition-transform duration-500 ease-in-out bg-[var(--accent-color)] text-[var(--primary-color)] w-full md:w-1/2 h-screen z-10`}>
+        <ul className="flex flex-col items-center">
+          <li>
+            <OurLink size="big" text="Tickets" color="dark" href="/tickets" />
+          </li>
+          <li>
+            <OurLink size="big" text="Program" color="dark" href="/program" />
+          </li>
+          <li>
+            {" "}
+            <OurLink size="big" text="Campingspots" color="dark" href="/" />
+          </li>
+          <li>
+            {" "}
+            <OurLink size="big" text="About us" color="dark" href="/" />
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }

@@ -13,7 +13,7 @@
 }
 body {
   background-color: var(--primary-color);
-  margin: 20px;
+  /* margin: 20px; */
 }
 /* Fonte */
 h1 {
@@ -56,8 +56,8 @@ a {
 /* Mobil */
 @media (max-width: 768px) {
   body {
-    margin-left: 1.25rem;
-    margin-right: 1.25rem;
+    /* margin-left: 1.25rem;
+    margin-right: 1.25rem; */
   }
   h2 {
     font-size: 2rem;
