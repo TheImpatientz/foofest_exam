@@ -28,8 +28,6 @@ export default function Home() {
       <h1>hallo</h1>
 
       <OurLink text="Klik her til test post siden" href="/postTest" />
-
-      <div className="h-80">hej</div>
     </Layout>
   );
 }
