@@ -2,6 +2,9 @@
 
 import Layout from "@/components/Layout";
 
+//Hvordan får man fat i indholdet i sine input felter i react?
+//Se her: https://react.dev/reference/react-dom/components/form#handle-form-submission-on-the-client
+
 let orderObj = {};
 
 function send(formData) {

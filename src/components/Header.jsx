@@ -6,10 +6,11 @@ import OurLink from "./OurLink";
 //Burgermenu icon + animation installeret fra https://hamburger-react.netlify.app (installeret 5/12/23)
 
 export default function Header() {
+  //isOpen statet skifter til true, når burger menuen åbner
   const [isOpen, setOpen] = useState(false);
   const color = isOpen ? "#292d32" : "#f6f1f1";
   return (
-    <header className={`flex justify-between mb-2 relative ${isOpen && "fixed"}`}>
+    <header className={`flex justify-between my-2 ml-2 relative ${isOpen && "fixed"}`}>
       <a href="/">
         {" "}
         <svg className="md:h-28 md:w-28" width="57" height="57" viewBox="0 0 113 112" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +50,7 @@ export default function Header() {
         </svg>
       </a>
 
-      <div className="flex">
+      <div className="flex items-center">
         <svg className="md:h-12 md:w-12 cursor-pointer" width="35" height="35" viewBox="0 0 53 52" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M26.6129 25.8122C31.3503 25.8122 35.1875 21.9751 35.1875 17.2377C35.1875 12.5002 31.3503 8.66309 26.6129 8.66309C21.8754 8.66309 18.0383 12.5002 18.0383 17.2377C18.0383 21.9751 21.8754 25.8122 26.6129 25.8122ZM26.6129 30.0995C20.8894 30.0995 9.46375 32.972 9.46375 38.6741V42.9614H43.762V38.6741C43.762 32.972 32.3364 30.0995 26.6129 30.0995Z"
@@ -63,16 +64,16 @@ export default function Header() {
       </div>
 
       <nav className={` ${isOpen ? "" : "translate-x-full"} flex items-center justify-center fixed top-0 right-0 transition-transform duration-500 ease-in-out bg-[var(--accent-color)] text-[var(--primary-color)] w-full md:w-1/2 h-screen z-10`}>
-        <ul className="flex flex-col items-center">
-          <li>
+        <ul className="flex flex-col place-content-center mb-40 w-fit">
+          <li className="w-full h-auto">
             <OurLink size="big" text="Tickets" color="dark" href="/tickets" />
           </li>
           <li>
             <OurLink size="big" text="Program" color="dark" href="/program" />
           </li>
-          <li>
+          <li className="w-full h-auto">
             {" "}
-            <OurLink size="big" text="Campingspots" color="dark" href="/" />
+            <OurLink size="big" text="Camping" color="dark" href="/" />
           </li>
           <li>
             {" "}

@@ -55,10 +55,10 @@ a {
 
 /* Mobil */
 @media (max-width: 768px) {
-  body {
-    /* margin-left: 1.25rem;
-    margin-right: 1.25rem; */
-  }
+  /* body {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  } */
   h2 {
     font-size: 2rem;
   }
@@ -72,10 +72,10 @@ a {
 
 /* Desktop */
 @media (min-width: 768px) {
-  body {
+  /* body {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
-  }
+  } */
   main {
     margin-left: 2rem;
     margin-right: 2rem;
