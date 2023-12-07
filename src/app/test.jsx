@@ -2,7 +2,7 @@ import HeaderTwo from "@/components/HeaderTwo";
 import Layout from "@/components/Layout";
 import SecondaryButton from "@/components/SecondaryButton";
 
-export default async function program() {
+export default async function Program() {
   // let headersList = {
   //     apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib2F3YnZka2dieHV5aWh1eXpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTY4NTE1MzAsImV4cCI6MjAxMjQyNzUzMH0.Iq40XCZG1EvkMh2BD41TMTkAK97Ow5WwUwb_7tDsZeI",
   //     Prefer: "return=representation",
