@@ -10,6 +10,7 @@
   --primary-color: #292d32;
   --secondary-color: #f6f1f1;
   --border-color: #c5ef1a;
+  --display-font: "Ibarra Real Nova";
 }
 body {
   background-color: var(--primary-color);
@@ -50,6 +51,9 @@ a {
   color: var(--secondary-color);
 }
 .newsletter_p {
+  font-family: "Ibarra Real Nova", serif;
+}
+.landing_span {
   font-family: "Ibarra Real Nova", serif;
 }
 

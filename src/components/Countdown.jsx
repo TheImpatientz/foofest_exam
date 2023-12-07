@@ -53,7 +53,7 @@ export default function Countdown() {
   //   }, [days, hours, minutes, seconds]);
 
   return (
-    <div className="grid grid-flow-col gap-5 text-center auto-cols-max text-[var(--secondary-color)] justify-center">
+    <div className="my-6 grid grid-flow-col gap-5 text-center auto-cols-max text-[var(--secondary-color)] justify-center">
       <div className="flex flex-col">
         <span className="countdown font-mono text-3xl md:text-5xl">
           <span style={{ "--value": days }}></span>

@@ -1,22 +1,23 @@
 import Image from "next/image";
 
 import styles from "@/app/landing.module.css";
-import Countdown from "./Countdown";
+
+import forrestPic from "@/img/forrest.png";
+import partyPic from "@/img/party.png";
+import campingPic from "@/img/camping.png";
+
+import Countdown from "../components/Countdown";
 import Layout from "@/components/Layout";
 import HeaderTwo from "@/components/HeaderTwo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SecondaryButton from "@/components/SecondaryButton";
 
+//Alle h4´s tekst er genereret ved brug af ChatGPT. Teksterne er beskrivelser af festivallen
+
 export default function Home() {
   return (
     <>
-      {/* <Layout className="relative">
-      <div className={`absolute left-0 md:left-0 top-0 w-screen h-fit overflow-hidden`}>
-        <Image src={landingPic} alt="FooFest image" priority className="max-w-none w-auto md:w-screen h-96 md:h-auto" />
-      </div>
-      <div className={`${styles.landing_image} h-96 w-full absolute left-0 top-0 z-0`}></div>
-    </Layout> */}
       <div className={`${styles.landing_image} h-96 md:h-min flex flex-col gap-8`}>
         <Header />
         <h1 className="flex items-center justify-center my-9">
@@ -101,6 +102,20 @@ export default function Home() {
       </div>
       <main className="m-5 md:mx-6">
         <Countdown />
+        <section className="grid md:grid-cols-2 md:row-auto md:items-center gap-8 justify-items-center my-12 md:mx-10">
+          <Image src={forrestPic} alt="Picture of the nature around the festival" className="md:h-96 md:w-auto md:self-end" />
+          <h4>
+            <span className="landing_span italic">FooFest</span> is a festival placed in the beautiful nature at Iceland, where the music is in center{" "}
+          </h4>
+          <Image src={partyPic} alt="Picture of last festival concert" className="md:col-start-2 md:h-96 md:w-auto" />
+          <h4 className="md:col-start-1 md:row-start-2">
+            <span className="landing_span italic">FooFest</span> festival is a 7 day festival, where music and nature is the key element.
+          </h4>
+          <Image src={campingPic} alt="Picture of the Sveitheim campingspot" className="md:h-96 md:w-auto" />
+          <h4>
+            <span className="landing_span italic">FooFest</span> is more than an event. It´s a celebration of the connection between music, nature, and people in the middle of the North Atlantic.
+          </h4>
+        </section>
       </main>
       <Footer />
     </>
