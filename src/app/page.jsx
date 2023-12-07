@@ -19,9 +19,6 @@ import Plusminus from "@/components/plusminus";
 import { useState } from "react";
 
 export default function Home() {
-  //metode til at få vist "flere sider" ligesom i matasquizzen
-  const [visible, setVisible] = useState(1);
-
   const testArray = ["test", "test", "test", "test"];
   return (
     <Layout>
