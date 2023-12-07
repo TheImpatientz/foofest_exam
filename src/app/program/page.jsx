@@ -5,7 +5,7 @@ import SecondaryButton from "@/components/SecondaryButton";
 // FETCHER DATA FRA DATABASEN MED SCHEDULE FOR AT TAGE FAT I PROGRAMMET
 export default async function program() {
   // SKAL SKIFTES UD MED ANDEN URL
-  let response = await fetch(`http://localhost:8080/schedule`, {
+  let response = await fetch(`https://plant-flaxen-glove.glitch.me/schedule`, {
     method: "GET",
   });
 
