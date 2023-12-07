@@ -1,17 +1,12 @@
 import HeaderTwo from "@/components/HeaderTwo";
 import Layout from "@/components/Layout";
-import ProgramContent from "@/components/ProgramContent";
 import Schedule from "@/components/Schedule";
 import SecondaryButton from "@/components/SecondaryButton";
-
+// FETCHER DATA FRA DATABASEN MED SCHEDULE FOR AT TAGE FAT I PROGRAMMET
 export default async function program() {
-  // let headersList = {
-  //     apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib2F3YnZka2dieHV5aWh1eXpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTY4NTE1MzAsImV4cCI6MjAxMjQyNzUzMH0.Iq40XCZG1EvkMh2BD41TMTkAK97Ow5WwUwb_7tDsZeI",
-  //     Prefer: "return=representation",
-  //   };
-  let response = await fetch(`http://localhost:8080/bands`, {
+  // SKAL SKIFTES UD MED ANDEN URL
+  let response = await fetch(`http://localhost:8080/schedule`, {
     method: "GET",
-    // headers: headersList,
   });
 
   const data = await response.json();
@@ -20,7 +15,8 @@ export default async function program() {
     <Layout>
       <HeaderTwo page="Program" />
       <SecondaryButton />
-      <Schedule></Schedule>
+      {/* SENDER DATA MED NED TIL SCHEDULE */}
+      <Schedule data={data}></Schedule>
     </Layout>
   );
 }
