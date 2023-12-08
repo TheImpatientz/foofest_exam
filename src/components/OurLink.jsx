@@ -7,8 +7,9 @@ export default function OurLink({ text, size, color, href }) {
   const linkSize = size === "big" ? "md:text-7xl" : size === "small" ? "text-base" : "";
   const deskBigSize = size === "big" ? "text-3xl" : "";
 
+  //Link fra next.js med prefetch={false} så den ikke prefetcher alle links på forhånd.
   return (
-    <Link href={href} className={` ${style.a} ${deskBigSize} ${linkSize} ${color === "dark" && style.burger_a}`}>
+    <Link href={href} prefetch={false} className={` ${style.a} ${deskBigSize} ${linkSize} ${color === "dark" && style.burger_a}`}>
       {text}
     </Link>
   );
