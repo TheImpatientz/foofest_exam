@@ -11,7 +11,7 @@ export default function Countdown() {
 
   useEffect(() => {
     //Denne useEffect() køres én gang når siden loader
-    console.log("checking first time");
+    console.log("checking countdown first time");
     // countDownDate sætter vi til at være hvornår festivallen skal foregå
     //Når man benytter getTime() finder man det antal millisekunder der er gået siden January 1, 1970 00:00:00
     const countDownDate = new Date("February 5, 2024 12:00:00").getTime();
@@ -30,27 +30,27 @@ export default function Countdown() {
     setSeconds(Math.floor((distance % (1000 * 60)) / 1000));
   }, []);
 
-  //   useEffect(() => {
-  //     //Denne useEffect() kører i et interval hvert sekund (til at opdatere states)
-  //     const interval = setInterval(() => {
-  //       console.log("checking again");
-  //       const countDownDate = new Date("February 5, 2024 12:00:00").getTime();
+  useEffect(() => {
+    //Denne useEffect() kører i et interval hvert sekund (til at opdatere states)
+    const interval = setInterval(() => {
+      console.log("checking countdown again");
+      const countDownDate = new Date("February 5, 2024 12:00:00").getTime();
 
-  //       const now = new Date().getTime();
+      const now = new Date().getTime();
 
-  //       const distance = countDownDate - now;
+      const distance = countDownDate - now;
 
-  //       setDays(Math.floor(distance / (1000 * 60 * 60 * 24)));
-  //       setHours(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-  //       setMinutes(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
-  //       setSeconds(Math.floor((distance % (1000 * 60)) / 1000));
+      setDays(Math.floor(distance / (1000 * 60 * 60 * 24)));
+      setHours(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+      setMinutes(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+      setSeconds(Math.floor((distance % (1000 * 60)) / 1000));
 
-  //       //Vi returnere en funktion, der stopper intervallet, så vi undgår at flere intervaller bliver sat i gang hele tiden
-  //       return () => {
-  //         clearInterval(interval);
-  //       };
-  //     }, 1000);
-  //   }, [days, hours, minutes, seconds]);
+      //Vi returnere en funktion, der stopper intervallet, så vi undgår at flere intervaller bliver sat i gang hele tiden
+      return () => {
+        clearInterval(interval);
+      };
+    }, 1000);
+  }, [days, hours, minutes, seconds]);
 
   return (
     <div className="my-6 grid grid-flow-col gap-5 text-center auto-cols-max text-[var(--secondary-color)] justify-center">

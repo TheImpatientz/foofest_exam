@@ -7,13 +7,12 @@ import partyPic from "@/img/party.png";
 import campingPic from "@/img/camping.png";
 
 import Countdown from "../components/Countdown";
-import Layout from "@/components/Layout";
 import HeaderTwo from "@/components/HeaderTwo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SecondaryButton from "@/components/SecondaryButton";
 
-//Alle h4´s tekst er genereret ved brug af ChatGPT. Teksterne er beskrivelser af festivallen
+//Alle beskrivelser af Foofest er genereret ved brug af ChatGPT, udfra nogle keywords om en fiktiv musik og natur festival, der foregår på Island.
 
 export default function Home() {
   return (
@@ -117,11 +116,19 @@ export default function Home() {
           </p>
         </section>
         <HeaderTwo page="Tickets" />
-        <article>
-          <h3>REGULAR TICKET</h3>
-          <p>Full festival ticket with self-chosen camping included</p>
-          <p className="text-4xl">799 ,-</p>
-        </article>
+        <section className="flex flex-col w-full md:w-auto md:flex-row justify-between items-center gap-8 md:gap-20 ">
+          <article className="grid gap-1 border-solid border border-[var(--accent-color)] p-4 md:p-6 w-full sm:max-w-md md:w-1/2 h-60">
+            <h3 className="justify-self-center md:text-4xl">REGULAR TICKET</h3>
+            <p>Full festival ticket with self-chosen camping included.</p>
+            <p className="text-3xl md:text-4xl justify-self-end mt-6">799,-</p>
+          </article>
+          <article className="grid gap-1 border-solid border border-[var(--accent-color)] p-4 md:p-6 w-full sm:max-w-md md:w-1/2 h-60">
+            <h3 className="justify-self-center md:text-4xl">VIP TICKET</h3>
+            <p>Full festival ticket with self-chosen camping included. Gets one free drink each day.</p>
+            <p className="text-3xl md:text-4xl justify-self-end mt-6">1299,-</p>
+          </article>
+        </section>
+        <SecondaryButton specialClass="my-8 md:mx-6 justify-self-end" />
       </main>
       <Footer />
     </>
