@@ -100,22 +100,28 @@ export default function Home() {
         </h1>
         <SecondaryButton specialClass="m-5 md:mx-6" />
       </div>
-      <main className="m-5 md:mx-6">
+      <main className="m-5 md:mx-6 md:grid md:justify-items-center">
         <Countdown />
-        <section className="grid md:grid-cols-2 md:row-auto md:items-center gap-8 justify-items-center my-12 md:mx-10">
-          <Image src={forrestPic} alt="Picture of the nature around the festival" className="md:h-96 md:w-auto md:self-end" />
-          <h4>
+        <section className="grid md:grid-cols-2 md:row-auto md:items-center gap-8 md:gap-0 justify-items-center my-12 lg:w-4/5 border-b-2 border-solid border-[var(--accent-color)]">
+          <Image src={forrestPic} alt="Picture of the nature around the festival" className="md:h-96 md:w-auto md:justify-self-start" />
+          <p className="md:text-3xl">
             <span className="landing_span italic">FooFest</span> is a festival placed in the beautiful nature at Iceland, where the music is in center{" "}
-          </h4>
-          <Image src={partyPic} alt="Picture of last festival concert" className="md:col-start-2 md:h-96 md:w-auto" />
-          <h4 className="md:col-start-1 md:row-start-2">
+          </p>
+          <Image src={partyPic} alt="Picture of last festival concert" className="md:col-start-2 md:h-96 md:w-auto md:justify-self-end" />
+          <p className="md:text-3xl md:col-start-1 md:row-start-2">
             <span className="landing_span italic">FooFest</span> festival is a 7 day festival, where music and nature is the key element.
-          </h4>
-          <Image src={campingPic} alt="Picture of the Sveitheim campingspot" className="md:h-96 md:w-auto" />
-          <h4>
+          </p>
+          <Image src={campingPic} alt="Picture of the Sveitheim campingspot" className="md:h-96 md:w-auto md:justify-self-start md:mb-8" />
+          <p className="md:text-3xl mb-8">
             <span className="landing_span italic">FooFest</span> is more than an event. It´s a celebration of the connection between music, nature, and people in the middle of the North Atlantic.
-          </h4>
+          </p>
         </section>
+        <HeaderTwo page="Tickets" />
+        <article>
+          <h3>REGULAR TICKET</h3>
+          <p>Full festival ticket with self-chosen camping included</p>
+          <p className="text-4xl">799 ,-</p>
+        </article>
       </main>
       <Footer />
     </>
