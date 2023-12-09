@@ -1,5 +1,6 @@
 "use client";
 
+// import Dialog from "@/components/Dialog";
 import Dob from "@/components/Dob";
 import EkstraTicket from "@/components/EkstraTicket";
 import Footer from "@/components/Footer";
@@ -23,7 +24,7 @@ export default function Home() {
   return (
     <Layout>
       <h1>hallo</h1>
-
+      {/* <Dialog /> */}
       <OurLink text="Klik her til test post siden" href="/postTest" />
     </Layout>
   );

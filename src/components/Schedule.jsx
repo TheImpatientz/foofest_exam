@@ -84,6 +84,7 @@ export default function Schedule({ data }) {
                 itemSelectedColor: "var(--accent-color)",
                 inkBarColor: "var(--accent-color)",
                 itemColor: "var(--secondary-color)",
+                itemHoverColor: "var(--accent-color)",
               },
             },
           }}
