@@ -1,0 +1,14 @@
+.radio {
+  appearance: none;
+  background-color: transparent;
+  border: 1px solid var(--accent-color);
+  border-radius: 1em;
+  display: inline-block;
+  cursor: pointer;
+}
+.radio:hover {
+  background-color: var(--accent-color);
+}
+.radio:checked {
+  background-color: var(--accent-color);
+}
