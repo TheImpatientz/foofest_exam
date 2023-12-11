@@ -1,5 +1,4 @@
 "use client";
-//DOOOOOOONT MEEEERGE JULIIIIIIE (skal lave egen underside)!!!!!!!
 
 import Layout from "@/components/Layout";
 import PrimaryButton from "@/components/PrimaryButton";
@@ -8,14 +7,16 @@ import Plusminus from "@/components/Plusminus";
 import { useState, useEffect } from "react";
 import HeaderTwo from "@/components/HeaderTwo";
 import RadioBtn from "@/components/RadioBtn";
+import TentRadioBtnOne from "@/components/TentRadioBtnOne";
+import TentRadioBtnTwo from "@/components/TentRadioBtnTwo";
 
 // import Link from "@/components/Link";
 
 export default function Home() {
   //metode til at få vist "flere sider" ligesom i matasquizzen
-
-  //states og objects til CHOOSE TICKETS-------------
   const [visible, setVisible] = useState(1);
+
+  //states og objects til CHOOSE TICKETS------------------------------------------------------------
   //arrayet der holder styr på antal af hendholdvis regular- samt vip-tickets
   const [ticket, setTicket] = useState({ regular: 0, vip: 0 });
   // console.log("ticket er", ticket);
@@ -25,12 +26,14 @@ export default function Home() {
   // Dette objekt, bliver objektet der sendes i PUT-requesten
   let putDataObj = {};
 
-  //dette array skal holde styr på, hvor mange tickets der er bestilt, så vi til sidst kan map'e over antallet og lave x antal "ekstra tickets"
-  // KOMMENTAR const [ticketArray, setTicketArray] = useState([]);
+  //KOMMENTAR: dette array skal holde styr på, hvor mange tickets der er bestilt, så vi til sidst kan map'e over antallet  og tildele korrekt antal telte (hvis man vælger "CREW TENTS" samt lave x antal "ekstra tickets".
+  //   Der bliver tilføjer "ticket" til arrayet
+  const [ticketArray, setTicketArray] = useState([]);
+  console.log(ticketArray);
 
-  //states og objects til CHOOSE CAMPINGSPOTS-------------
+  //states og objects til CHOOSE CAMPINGSPOTS------------------------------------------------------
   const [chosenSpot, setChosenSpot] = useState("");
-  console.log(chosenSpot);
+  //   console.log(chosenSpot);
 
   const [spotsAvail, setSpotsAvail] = useState([]);
   // console.log("Dette er spots avail", spotsAvail);
@@ -61,15 +64,40 @@ export default function Home() {
       body: bodyContent,
       headers: headersList,
     });
-
-    let data = await response.text();
+    // Har ændret koden fra at være ".text()" til ".json()", så objektet der udskrives er json
+    let data = await response.json();
     console.log(data);
   }
 
+  //states og objects til CHOOSE TENT OPTION-------------------------------------------------------
+  //States der holder styr på antal a to-personers telte og 3-personers telte
+  const [twoPers, setTwoPers] = useState("");
+  const [threePers, setThreePers] = useState("");
+
+  function beregnTelte() {
+    if (ticketAmount === 2) {
+      setTwoPers((old) => old + 1);
+    } else if (ticketAmount === 3) {
+      setThreePers((old) => old + 1);
+    } else if (ticketAmount === 4) {
+      setTwoPers((old) => old + 2);
+    } else if (ticketAmount === 5) {
+      setTwoPers((old) => old + 1);
+      setThreePers((old) => old + 1);
+    } else if (ticketAmount === 6) {
+      setThreePers((old) => old + 2);
+    }
+    //indtil man har valgt 10 billetter
+  }
+  console.log("dette er twoPers", twoPers);
+  console.log("dette er twoPers", threePers);
+
+  const [greenCamping, setGreenCamping] = useState(false);
+  console.log(greenCamping);
+
   return (
     <Layout>
-      {/* Choose tickets
-      I denne section har vi ikke noget form-tag, da vi ikke bruger inputfelter på den første "side". Derimod samler vi data i et object, når der klikkes next */}
+      {/* I denne section har vi ikke noget form-tag, da vi ikke bruger inputfelter på den første "side". Derimod samler vi data i et object, når der klikkes next */}
       {visible === 1 && (
         <section>
           <HeaderTwo page="Checkout"></HeaderTwo>
@@ -83,14 +111,16 @@ export default function Home() {
                   updateTicketAdd={function updateTickets() {
                     {
                       setTicket((old) => ({ ...old, regular: old.regular + 1 }));
-                      // KOMMENTAR setTicketArray((oldArray) => [...oldArray, `ticket`]);
+                      // KOMMENTAR ved klik tilføjes "ticket" til ticketArray.
+                      setTicketArray((oldArray) => [...oldArray, "ticket"]);
                     }
                   }}
                   //sender en prop ned til Plusminus. Funktionen vil trække et tal fra 'regular ticket'
                   updateTicketSubstract={function updateTickets() {
                     {
                       setTicket((old) => ({ ...old, regular: old.regular - 1 }));
-                      // KOMMENTAR setTicketArray((oldArray) => oldArray.pop());
+                      // KOMMENTAR slice(0, -1) sørger for at fjerne det sidste item i arrayet
+                      setTicketArray((oldArray) => oldArray.slice(0, -1));
                     }
                   }}
                   setTicket={setTicket}
@@ -104,12 +134,15 @@ export default function Home() {
                   updateTicketAdd={function updateTickets() {
                     {
                       setTicket((old) => ({ ...old, vip: old.vip + 1 }));
-                      // KOMMENTAR setTicketArray((oldArray) => [...oldArray, `ticket`]);
+                      // KOMMENTAR ved klik tilføjes "ticket" til ticketArray
+                      setTicketArray((oldArray) => [...oldArray, "ticket"]);
                     }
                   }}
                   updateTicketSubstract={function updateTickets() {
                     {
                       setTicket((old) => ({ ...old, vip: old.vip - 1 }));
+                      // KOMMENTAR slice(0, -1) sørger for at fjerne det sidste item i arrayet
+                      setTicketArray((oldArray) => oldArray.slice(0, -1));
                     }
                   }}
                   setTicket={setTicket}
@@ -118,7 +151,7 @@ export default function Home() {
               </div>
             </div>
             {/* Her sendes ticket (som er et objekt) ned til YourPurchase, så jeg senerehen kan få fat i regular samt vip-værdierne */}
-            <YourPurchase ticket={ticket} />
+            <YourPurchase ticket={ticket} twoPers={twoPers} threePers={threePers} />
           </div>
           <PrimaryButton
             onClick={() => {
@@ -127,7 +160,6 @@ export default function Home() {
           />
         </section>
       )}
-      {/* Choose campingspot */}
       {visible === 2 && (
         <section>
           <HeaderTwo page="Checkout"></HeaderTwo>
@@ -138,20 +170,44 @@ export default function Home() {
             <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Helheim" text="HELHEIM"></RadioBtn>
             <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Muspelheim" text="MUSPELHEIM"></RadioBtn>
             <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Alfheim" text="ALFHEIM"></RadioBtn>
-            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} />
+            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} />
             <PrimaryButton
               onClick={() => {
                 // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
                 putDataObj.area = chosenSpot;
                 putDataObj.amount = ticketAmount;
-                console.log("dette er PUTobjektet", putDataObj);
+                // console.log("dette er PUTobjektet", putDataObj);
                 sendPutRequest();
 
                 dataObj.regular = ticket.regular;
                 dataObj.vip = ticket.vip;
                 dataObj.amount = ticketAmount;
                 dataObj.campingspot = chosenSpot;
-                console.log("dette er dataObjekt", dataObj);
+                // console.log("dette er dataObjekt", dataObj);
+                setVisible((o) => o + 1);
+              }}
+            />
+          </form>
+        </section>
+      )}
+      {visible === 3 && (
+        <section>
+          <HeaderTwo page="Checkout"></HeaderTwo>
+          <h3>CHOOSE CAMPINGSPOT</h3>
+          <form action="">
+            <TentRadioBtnOne name="tentoption" id="CrewTents" text="CREW TENTS" beregnTelte={beregnTelte}></TentRadioBtnOne>
+            <TentRadioBtnTwo name="tentoption" id="BringYourOwn" text="BRING YOUR OWN" setTwoPers={setTwoPers} setThreePers={setThreePers}></TentRadioBtnTwo>
+            <p>Do your group want to get a quiet spot closer to the green forrest? Add the Green Camping option</p>
+            <input
+              type="checkbox"
+              checked={greenCamping}
+              onChange={() => {
+                setGreenCamping((old) => !old);
+              }}
+            />
+            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} />
+            <PrimaryButton
+              onClick={() => {
                 setVisible((o) => o + 1);
               }}
             />
