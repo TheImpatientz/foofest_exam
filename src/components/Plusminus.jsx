@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Plusminus({ updateTicketAdd, updateTicketSubstract }) {
+export default function Plusminus({ updateTicketAdd, updateTicketSubstract, ticketArray }) {
   //state der holder styr på ticket antal
   const [counter, setCounter] = useState(0);
 
