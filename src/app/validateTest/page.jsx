@@ -86,8 +86,10 @@ export default function Home() {
 
   function validateCamp() {
     const formData = new FormData(form.current);
+    console.log("Dette er formData", formData);
     const radio = formData.get("campspots");
-    console.log(radio);
+    if (radio === null) {
+    }
 
     // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
     // putDataObj.area = chosenSpot;
@@ -174,19 +176,7 @@ export default function Home() {
             <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Muspelheim" text="MUSPELHEIM"></RadioBtn>
             <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Alfheim" text="ALFHEIM"></RadioBtn>
             <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} />
-            <PrimaryButton onClick={validateCamp} />
-          </section>
-        )}
-        {visible === 3 && (
-          <section>
-            <HeaderTwo page="Checkout"></HeaderTwo>
-            <h3>CHOOSE CAMPINGSPOT</h3>
-            <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Svartheim" text="SVARTHEIM"></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Nilfheim" text="NILFHEIM"></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Helheim" text="HELHEIM"></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Muspelheim" text="MUSPELHEIM"></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Alfheim" text="ALFHEIM"></RadioBtn>
-            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} />
+            {/* {isValidated === false && <p>Du skal vælge ét campspot</p>} */}
             <PrimaryButton onClick={validateCamp} />
           </section>
         )}
