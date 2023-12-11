@@ -29,7 +29,11 @@
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
-
+.a:visited::after,
+.a:active::after {
+  text-decoration: underline;
+  color: var(--primary-color);
+}
 .burger_a {
   color: var(--primary-color);
 }
