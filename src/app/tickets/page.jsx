@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 import PrimaryButton from "@/components/PrimaryButton";
 import YourPurchase from "@/components/YourPurchase";
 import Plusminus from "@/components/Plusminus";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import HeaderTwo from "@/components/HeaderTwo";
 import RadioBtn from "@/components/RadioBtn";
 import TentRadioBtnOne from "@/components/TentRadioBtnOne";
@@ -13,6 +13,7 @@ import TentRadioBtnTwo from "@/components/TentRadioBtnTwo";
 // import Link from "@/components/Link";
 
 export default function Home() {
+  const form = useRef(null);
   //metode til at få vist "flere sider" ligesom i matasquizzen
   const [visible, setVisible] = useState(1);
 
@@ -33,7 +34,24 @@ export default function Home() {
 
   //states og objects til CHOOSE CAMPINGSPOTS------------------------------------------------------
   const [chosenSpot, setChosenSpot] = useState("");
-  //   console.log(chosenSpot);
+  console.log(chosenSpot);
+
+  //Her tjekker den om required er opfyldt i CHOOSE CAMPINGSPOTS, når submit knappen trykkes på i dens form
+  function validateCampspot() {
+    // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
+    putDataObj.area = chosenSpot;
+    putDataObj.amount = ticketAmount;
+    console.log("dette er PUTobjektet", putDataObj);
+    sendPutRequest();
+
+    dataObj.regular = ticket.regular;
+    dataObj.vip = ticket.vip;
+    dataObj.amount = ticketAmount;
+    dataObj.campingspot = chosenSpot;
+    console.log("dette er dataObjekt", dataObj);
+
+    setVisible((o) => o + 1);
+  }
 
   const [spotsAvail, setSpotsAvail] = useState([]);
   // console.log("Dette er spots avail", spotsAvail);
@@ -51,7 +69,7 @@ export default function Home() {
   const ticketAmount = ticket.regular + ticket.vip;
   // console.log("amout er", ticketAmount);
 
-  // Denne funktion bliver kaldt når der klikkes næste på chooseCampingspot-siden. Funktionen sender et PUT-request, som returnerer et id, hvis der er plads på spot'et
+  // Denne funktion bliver kaldt når der klikkes submit på chooseCampingspot-siden. Funktionen sender et PUT-request, som returnerer et id, hvis der er plads på spot'et
   async function sendPutRequest() {
     let headersList = {
       "Content-Type": "application/json",
@@ -164,7 +182,7 @@ export default function Home() {
         <section>
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>CHOOSE CAMPINGSPOT</h3>
-          <form action="">
+          <form action={validateCampspot}>
             <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Svartheim" text="SVARTHEIM"></RadioBtn>
             <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Nilfheim" text="NILFHEIM"></RadioBtn>
             <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Helheim" text="HELHEIM"></RadioBtn>
@@ -172,20 +190,22 @@ export default function Home() {
             <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Alfheim" text="ALFHEIM"></RadioBtn>
             <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} />
             <PrimaryButton
-              onClick={() => {
-                // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
-                putDataObj.area = chosenSpot;
-                putDataObj.amount = ticketAmount;
-                // console.log("dette er PUTobjektet", putDataObj);
-                sendPutRequest();
+            // onClick={(formData) => {
+            //   const radio = formData.get("campspot");
+            //   console.log(radio.checkValidity());
+            //   // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
+            //   putDataObj.area = chosenSpot;
+            //   putDataObj.amount = ticketAmount;
+            //   console.log("dette er PUTobjektet", putDataObj);
+            //   sendPutRequest();
 
-                dataObj.regular = ticket.regular;
-                dataObj.vip = ticket.vip;
-                dataObj.amount = ticketAmount;
-                dataObj.campingspot = chosenSpot;
-                // console.log("dette er dataObjekt", dataObj);
-                setVisible((o) => o + 1);
-              }}
+            //   dataObj.regular = ticket.regular;
+            //   dataObj.vip = ticket.vip;
+            //   dataObj.amount = ticketAmount;
+            //   dataObj.campingspot = chosenSpot;
+            //   // console.log("dette er dataObjekt", dataObj);
+            //setVisible((o) => o + 1);
+            //}}
             />
           </form>
         </section>

@@ -1,6 +1,9 @@
 "use client";
 
+import Cardinfo from "@/components/Cardinfo";
+import Labelinput from "@/components/Labelinput";
 import Layout from "@/components/Layout";
+import RadioBtn from "@/components/RadioBtn";
 
 //Hvordan får man fat i indholdet i sine input felter i react?
 //Se her: https://react.dev/reference/react-dom/components/form#handle-form-submission-on-the-client
@@ -59,7 +62,7 @@ function addTicket(formData) {
 export default function postTest() {
   return (
     <Layout>
-      <form action={addTicket}>
+      {/* <form action={addTicket}>
         <label htmlFor="ticket">
           ticket
           <input type="text" id="ticket" name="ticket" />
@@ -85,6 +88,22 @@ export default function postTest() {
           <input type="text" id="lastname" name="lastname" />
         </label>
         <button type="submit">Send</button>
+      </form> */}
+
+      <form>
+        {/* <label htmlFor="name">
+          Name
+          <input type="text" id="name" name="name" required />
+        </label>
+        <label htmlFor="cardnumber">
+          Name
+          <input type="text" id="cardnumber" name="cardnumber" minLength={16} required />
+        </label> */}
+        <Labelinput id="name" inputname="name" label="Name" placeholder="navn navnsen" type="text" forId="name" />
+        <Labelinput id="number" inputname="number" label="Number" placeholder="" type="numeric" forId="number" minLength={16} maxLength={16} />
+        <Cardinfo />
+
+        <button type="submit">submit</button>
       </form>
     </Layout>
   );
