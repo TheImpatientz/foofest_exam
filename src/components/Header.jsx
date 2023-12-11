@@ -31,6 +31,9 @@ export default function Header() {
       <nav className={` ${isOpen ? "" : "translate-x-full"} flex items-center justify-center fixed top-0 right-0 transition-transform duration-500 ease-in-out bg-[var(--accent-color)] text-[var(--primary-color)] w-full md:w-1/2 h-screen z-10`}>
         <ul className="flex flex-col place-content-center mb-40 w-fit">
           <li className="w-full h-auto">
+            <OurLink size="big" text="Home" color="dark" href="/" />
+          </li>
+          <li className="w-full h-auto">
             <OurLink size="big" text="Tickets" color="dark" href="/tickets" />
           </li>
           <li>
