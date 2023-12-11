@@ -19,7 +19,7 @@ export default function ProgramItem({ act, start, end }) {
         </li>
         {/* popover der viser den når staten er true*/}
         {isPopoverVisible && (
-          <div className={`${styles.mypopover} max-w-[300px] md:max-w-[700px] md:p-8 p-5`}>
+          <div className={`${styles.mypopover} max-w-[350px] md:max-w-[700px] md: md:p-8 p-5`}>
             <button className={`${styles.closebtn} p-3`} onClick={() => setIsPopoverVisible(!isPopoverVisible)}>
               <span aria-hidden="true">
                 <svg width="40" height="24" viewBox="0 0 50 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,9 +29,9 @@ export default function ProgramItem({ act, start, end }) {
               </span>
               <span className={`${styles.sronly}`}>Close</span>
             </button>
-            <div className="grid grid-cols-1 md:grid-cols-3">
-              <Image src={band} alt="band" width={250} height={250} className="md:w-11/12 w-9/12" />
-              <div className="md:col-span-2 md:place-self-center mb-4">
+            <div className="grid grid-cols-3">
+              <Image src={band} alt="band" width={250} height={250} className="w-11/12" />
+              <div className="col-span-2 place-self-center mb-4">
                 <h3 className="md:text-[1.75rem] text-[1.25rem]">Price, Grant and Bechtelar</h3>
                 <h4 className="md:text-[1.25rem] text-[0.875rem]">Rock</h4>
                 <h4 className="md:text-[1.25rem] text-[0.875rem]">Kim, Frans and Jacob</h4>
