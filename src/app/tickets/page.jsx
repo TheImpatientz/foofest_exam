@@ -35,6 +35,7 @@ export default function Home() {
 
   //states og objects til CHOOSE CAMPINGSPOTS------------------------------------------------------
   const [chosenSpot, setChosenSpot] = useState("");
+
   console.log(chosenSpot);
 
   //Her tjekker den om required er opfyldt i CHOOSE CAMPINGSPOTS, når submit knappen trykkes på i dens form
@@ -68,7 +69,7 @@ export default function Home() {
 
   // Beregner det fulde antal af billetter
   const ticketAmount = ticket.regular + ticket.vip;
-  // console.log("amout er", ticketAmount);
+  //console.log("amout er", ticketAmount);
 
   // Denne funktion bliver kaldt når der klikkes submit på chooseCampingspot-siden. Funktionen sender et PUT-request, som returnerer et id, hvis der er plads på spot'et
   async function sendPutRequest() {
@@ -189,11 +190,11 @@ export default function Home() {
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>CHOOSE CAMPINGSPOT</h3>
           <form action={validateCampspot}>
-            <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Svartheim" text="SVARTHEIM"></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Nilfheim" text="NILFHEIM"></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Helheim" text="HELHEIM"></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Muspelheim" text="MUSPELHEIM"></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} setChosenSpot={setChosenSpot} name="campspots" id="Alfheim" text="ALFHEIM"></RadioBtn>
+            <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Svartheim" text="SVARTHEIM" ticketAmount={ticketAmount}></RadioBtn>
+            <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Nilfheim" text="NILFHEIM" ticketAmount={ticketAmount}></RadioBtn>
+            <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Helheim" text="HELHEIM" ticketAmount={ticketAmount}></RadioBtn>
+            <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Muspelheim" text="MUSPELHEIM" ticketAmount={ticketAmount}></RadioBtn>
+            <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Alfheim" text="ALFHEIM" ticketAmount={ticketAmount}></RadioBtn>
             <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} />
             <PrimaryButton
               onClick={() => {
