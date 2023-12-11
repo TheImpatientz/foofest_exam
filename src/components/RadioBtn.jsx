@@ -35,6 +35,7 @@ export default function RadioBtn({ name, id, status, setChosenSpot, spotsAvail, 
                 setIsChecked((old) => !old);
                 setChosenSpot(id);
               }}
+              value={id}
             />
             <p className="text-[var(--secondary-color)] text-xl md:text-4xl ml-4 h-fit">{text + idObjectAvail}</p>
           </div>

@@ -22,6 +22,7 @@ export default function Labelinput({ id, inputname, label, placeholder, type, fo
         minLength={minLength}
         ref={refName}
         onKeyDown={onKeyDown}
+        required
       />
     </div>
   );
