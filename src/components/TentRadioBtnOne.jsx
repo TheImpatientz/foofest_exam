@@ -4,7 +4,7 @@ import styles from "@/components/RadioBtn.module.css";
 //RadioBtn skal modtage
 //Et name (dette skal være ens for de buttons der er i samme gruppe)
 //Et id, der skal være unikt og som også bliver den tekst der vises i label
-export default function TentRadioBtnOne({ name, id, text, beregnTelte }) {
+export default function TentRadioBtnOne({ name, id, text, beregnTelte, setBringYourOwn }) {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
@@ -21,6 +21,7 @@ export default function TentRadioBtnOne({ name, id, text, beregnTelte }) {
               onChange={() => {
                 beregnTelte();
                 setIsChecked((old) => !old);
+                setBringYourOwn((old) => false);
               }}
             />
             <p className="text-[var(--secondary-color)] text-xl md:text-4xl ml-4 h-fit">{text}</p>

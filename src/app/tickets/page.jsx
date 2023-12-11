@@ -23,6 +23,7 @@ export default function Home() {
 
   // Dette objekt bliver det komplette objekt med alle opsamlede værdier
   let dataObj = {};
+  console.log(dataObj);
   // Dette objekt, bliver objektet der sendes i PUT-requesten
   let putDataObj = {};
 
@@ -71,9 +72,10 @@ export default function Home() {
 
   //states og objects til CHOOSE TENT OPTION-------------------------------------------------------
   //States der holder styr på antal a to-personers telte og 3-personers telte
-  const [twoPers, setTwoPers] = useState("");
-  const [threePers, setThreePers] = useState("");
+  const [twoPers, setTwoPers] = useState(0);
+  const [threePers, setThreePers] = useState(0);
 
+  //beregnTelte sørger for at tildele korrekt antal telte til køberen, som herefter kan vises i YOUR PURCHASE
   function beregnTelte() {
     if (ticketAmount === 2) {
       setTwoPers((old) => old + 1);
@@ -89,11 +91,15 @@ export default function Home() {
     }
     //indtil man har valgt 10 billetter
   }
-  console.log("dette er twoPers", twoPers);
-  console.log("dette er twoPers", threePers);
+  // console.log("dette er twoPers", twoPers);
+  // console.log("dette er twoPers", threePers);
 
+  //Hvis man medbringer sit eget telt, er dette state true
+  const [bringYourOwn, setBringYourOwn] = useState(false);
+
+  //State der holder styr på om GREEN CAMPING  er valgt eller ikke
   const [greenCamping, setGreenCamping] = useState(false);
-  console.log(greenCamping);
+  // console.log(greenCamping);
 
   return (
     <Layout>
@@ -179,11 +185,6 @@ export default function Home() {
                 // console.log("dette er PUTobjektet", putDataObj);
                 sendPutRequest();
 
-                dataObj.regular = ticket.regular;
-                dataObj.vip = ticket.vip;
-                dataObj.amount = ticketAmount;
-                dataObj.campingspot = chosenSpot;
-                // console.log("dette er dataObjekt", dataObj);
                 setVisible((o) => o + 1);
               }}
             />
@@ -193,10 +194,10 @@ export default function Home() {
       {visible === 3 && (
         <section>
           <HeaderTwo page="Checkout"></HeaderTwo>
-          <h3>CHOOSE CAMPINGSPOT</h3>
+          <h3>CHOOSE A TENT OPTION</h3>
           <form action="">
-            <TentRadioBtnOne name="tentoption" id="CrewTents" text="CREW TENTS" beregnTelte={beregnTelte}></TentRadioBtnOne>
-            <TentRadioBtnTwo name="tentoption" id="BringYourOwn" text="BRING YOUR OWN" setTwoPers={setTwoPers} setThreePers={setThreePers}></TentRadioBtnTwo>
+            <TentRadioBtnOne name="tentoption" id="CrewTents" text="CREW TENTS" beregnTelte={beregnTelte} setBringYourOwn={setBringYourOwn}></TentRadioBtnOne>
+            <TentRadioBtnTwo name="tentoption" id="BringYourOwn" text="BRING YOUR OWN" setTwoPers={setTwoPers} setThreePers={setThreePers} setBringYourOwn={setBringYourOwn}></TentRadioBtnTwo>
             <p>Do your group want to get a quiet spot closer to the green forrest? Add the Green Camping option</p>
             <input
               type="checkbox"
@@ -205,9 +206,18 @@ export default function Home() {
                 setGreenCamping((old) => !old);
               }}
             />
-            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} />
+            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} bringYourOwn={bringYourOwn} />
             <PrimaryButton
               onClick={() => {
+                //Vi tilføjer vores states som items til dataObj
+                dataObj.regular = ticket.regular;
+                dataObj.vip = ticket.vip;
+                dataObj.amount = ticketAmount;
+                dataObj.campingspot = chosenSpot;
+                dataObj.two_pers_tent = twoPers;
+                dataObj.three_pers_tent = threePers;
+                dataObj.greenCamping = greenCamping;
+                console.log("dette er dataObjekt", dataObj);
                 setVisible((o) => o + 1);
               }}
             />

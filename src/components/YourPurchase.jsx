@@ -1,5 +1,5 @@
 // ticket bliver sendt med til barnet, så vi kan gribe fat i værdierne, der befinder sig i objektet
-export default function YourPurchase({ campingspot, ticket, twoPers, threePers }) {
+export default function YourPurchase({ campingspot, ticket, twoPers, threePers, greenCamping, bringYourOwn }) {
   return (
     <div className="outline outline-[var(--accent-color)] outline-1 p-7 mb-2 font-semibold">
       <h4 className="pb-9">YOUR PURCHASE</h4>
@@ -33,10 +33,17 @@ export default function YourPurchase({ campingspot, ticket, twoPers, threePers }
         </div>
       )}
 
-      {twoPers === 0 && threePers === 0 && (
+      {bringYourOwn === true && (
         <div className="flex justify-between pt-7 ">
           <p>BRING YOUR OWN</p>
           <p className="">0 DKK</p>
+        </div>
+      )}
+
+      {greenCamping === true && (
+        <div className="flex justify-between pt-7 ">
+          <p>GREEN CAMPING</p>
+          <p className="">249 DKK</p>
         </div>
       )}
 
@@ -47,7 +54,7 @@ export default function YourPurchase({ campingspot, ticket, twoPers, threePers }
 
       <div className="flex justify-between border-t border-[var(--accent-color)] pt-8">
         <p className="text-[1.3rem] md:text-[1.5rem]">TOTAL</p>
-        <p className="text-[1.3rem] md:text-[1.5rem]">{ticket.regular * 799 + ticket.vip * 1299 + twoPers * 299 + threePers * 399 + 99} DKK</p>
+        <p className="text-[1.3rem] md:text-[1.5rem]">{ticket.regular * 799 + ticket.vip * 1299 + twoPers * 299 + threePers * 399 + (greenCamping ? 249 : 0) + 99} DKK</p>
       </div>
     </div>
   );

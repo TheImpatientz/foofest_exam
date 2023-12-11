@@ -4,9 +4,8 @@ import styles from "@/components/RadioBtn.module.css";
 //RadioBtn skal modtage
 //Et name (dette skal være ens for de buttons der er i samme gruppe)
 //Et id, der skal være unikt og som også bliver den tekst der vises i label
-export default function TentRadioBtnTwo({ name, id, text, setTwoPers, setThreePers }) {
+export default function TentRadioBtnTwo({ name, id, text, setTwoPers, setThreePers, setBringYourOwn }) {
   const [isChecked, setIsChecked] = useState(false);
-
   return (
     <>
       <div className={`cursor-pointer mb-5 border hover:border-[3px] border-solid border-[var(--accent-color)] w-full md:w-80 h-28 md:h-44 ${styles.checked} ${isChecked && "border-[3px]"}`}>
@@ -19,9 +18,10 @@ export default function TentRadioBtnTwo({ name, id, text, setTwoPers, setThreePe
               id={id}
               required
               onChange={() => {
-                setIsChecked((old) => !old);
                 setTwoPers((old) => 0);
                 setThreePers((old) => 0);
+                setBringYourOwn((old) => !old);
+                setIsChecked((old) => !old);
               }}
             />
             <p className="text-[var(--secondary-color)] text-xl md:text-4xl ml-4 h-fit">{text}</p>
