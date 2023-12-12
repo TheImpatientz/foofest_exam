@@ -36,7 +36,7 @@ export default function Home() {
   //KOMMENTAR: dette array skal holde styr på, hvor mange tickets der er bestilt, så vi til sidst kan map'e over antallet  og tildele korrekt antal telte (hvis man vælger "CREW TENTS" samt lave x antal "ekstra tickets".
   //   Der bliver tilføjer "ticket" til arrayet
   const [ticketArray, setTicketArray] = useState([]);
-  console.log(ticketArray);
+  // console.log(ticketArray);
 
   //states og objects til CHOOSE CAMPINGSPOTS------------------------------------------------------
   const [chosenSpot, setChosenSpot] = useState("");
@@ -132,6 +132,73 @@ export default function Home() {
   // Så har vi et array med et antal items, der passer til antallet af ekstra personer udover køberen.
   // Vi laver lige en kopi i stedet for at modificere det originale array
   let copyTicketArray = ticketArray;
+
+  function addPersonalInfo(formData) {
+    //Hér tilføjer vi items (vores states) til dataObj
+    dataObj.regular = ticket.regular;
+    dataObj.vip = ticket.vip;
+    dataObj.amount = ticketAmount;
+    dataObj.campingspot = chosenSpot;
+    dataObj.two_pers_tent = twoPers;
+    dataObj.three_pers_tent = threePers;
+    dataObj.greenCamping = greenCamping;
+    // console.log("dette er dataObjekt", dataObj);
+
+    //Her sørger vi for (ved hver const) at fange/get (PERSONAL INFORMATION) inputfeltets data. Efterfølgende putter vi det ind i vores dataObj (objekt)
+    const firstname = formData.get("firstname");
+    dataObj.firstname = firstname;
+
+    const lastname = formData.get("lastname");
+    dataObj.lastname = lastname;
+
+    const day = formData.get("day");
+    dataObj.day = day;
+
+    const month = formData.get("month");
+    dataObj.month = month;
+
+    const year = formData.get("year");
+    dataObj.year = year;
+
+    const adress = formData.get("adress");
+    dataObj.adress = adress;
+
+    const zipcode = formData.get("zipcode");
+    dataObj.zipcode = zipcode;
+
+    const city = formData.get("city");
+    dataObj.city = city;
+
+    const email = formData.get("email");
+    dataObj.email = email;
+
+    const telephone = formData.get("telephone");
+    dataObj.telephone = telephone;
+
+    console.log("dette er objektet", dataObj);
+
+    postOrder(dataObj);
+
+    setVisible((o) => o + 1);
+  }
+
+  async function postOrder(data) {
+    let headersList = {
+      apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmZGZ3YXVmeXR3ZHVyb3BuZHl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTY4NDY3NzMsImV4cCI6MjAxMjQyMjc3M30.cX_qLqrbHMXj2dbzqfm88QbNPlMAXYOy8OQkNapHWG8",
+      "Content-Type": "application/json",
+      Prefer: "return=representation",
+    };
+    let bodyContent = JSON.stringify(data);
+
+    let response = await fetch("https://pfdfwaufytwduropndyt.supabase.co/rest/v1/personal_informations", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList,
+    });
+
+    let answer = await response.json();
+    return answer;
+  }
 
   return (
     <Layout>
@@ -255,20 +322,20 @@ export default function Home() {
         <section>
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>PERSONAL INFORMATION</h3>
-          <form action="">
+          <form action={addPersonalInfo}>
             <div>
               <div tabIndex={0} className="collapse bg-[var(--primary-color)] collapse-arrow border border-[var(--accent-color)] rounded-none">
                 <input type="checkbox" />
                 <div className="collapse-title text-[var(--secondary-color)] text-xl md:text-4xl">YOUR INFORMATION</div>
                 <div className="collapse-content">
-                  <Labelinput label="FIRSTNAME" placeholder="EX. PETER"></Labelinput>
-                  <Labelinput label="LASTNAME" placeholder="EX. THOMSON"></Labelinput>
+                  <Labelinput id="firstname" inputname="firstname" type="text" label="FIRSTNAME" placeholder="EX. PETER"></Labelinput>
+                  <Labelinput id="lastname" inputname="lastname" type="text" label="LASTNAME" placeholder="EX. THOMSON"></Labelinput>
                   <Dob></Dob>
-                  <Labelinput label="ADRESS" placeholder="EX. STENSTYKKEVEJ, 62"></Labelinput>
-                  <Labelinput label="ZIPCODE" placeholder="EX. 2650"></Labelinput>
-                  <Labelinput label="CITY" placeholder="EX. HVIDOVRE"></Labelinput>
-                  <Labelinput label="EMAIL" placeholder="EX. THOMSON@HOTMAIL.COM"></Labelinput>
-                  <Labelinput label="TELEPHONE NR." placeholder="TELEPHONE NR.FIIIIIIX!!!"></Labelinput>
+                  <Labelinput id="adress" inputname="adress" type="text" label="ADRESS" placeholder="EX. STENSTYKKEVEJ, 62"></Labelinput>
+                  <Labelinput id="zipcode" inputname="zipcode" type="text" label="ZIPCODE" placeholder="EX. 2650"></Labelinput>
+                  <Labelinput id="city" inputname="city" type="text" label="CITY" placeholder="EX. HVIDOVRE"></Labelinput>
+                  <Labelinput id="email" inputname="email" type="email" label="EMAIL" placeholder="EX. THOMSON@HOTMAIL.COM"></Labelinput>
+                  <Labelinput id="telephone" inputname="telephone" type="text" label="TELEPHONE NR." placeholder="TELEPHONE NR.FIIIIIIX!!!"></Labelinput>
                 </div>
               </div>
             </div>
@@ -303,7 +370,7 @@ export default function Home() {
           <h3>CHOOSE PAYMENT</h3>
           <form action="">
             <Cardinfo></Cardinfo>
-            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOptionn={tentOption} />
+            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOption={tentOption} />
             <PrimaryButton
               text="NEXT"
               onClick={() => {
