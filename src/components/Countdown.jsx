@@ -33,7 +33,7 @@ export default function Countdown() {
   useEffect(() => {
     //Denne useEffect() kører i et interval hvert sekund (til at opdatere states)
     const interval = setInterval(() => {
-      console.log("checking countdown again");
+      // console.log("checking countdown again");
       const countDownDate = new Date("February 5, 2024 12:00:00").getTime();
 
       const now = new Date().getTime();

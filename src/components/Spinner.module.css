@@ -1,0 +1,35 @@
+.popupOverlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.785);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  display: block;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.spinner {
+  align-self: center;
+  justify-self: center;
+  -webkit-animation: spin 5s linear infinite;
+  animation: spin 5s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

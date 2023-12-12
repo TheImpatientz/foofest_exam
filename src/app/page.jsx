@@ -6,7 +6,6 @@ import foofestLogo from "@/logo/logo.svg";
 import forrestPic from "@/img/forrest.png";
 import partyPic from "@/img/party.png";
 import campingPic from "@/img/camping.png";
-
 import Countdown from "../components/Countdown";
 import HeaderTwo from "@/components/HeaderTwo";
 import Header from "@/components/Header";
