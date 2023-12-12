@@ -15,7 +15,7 @@ import TentRadioBtnTwo from "@/components/TentRadioBtnTwo";
 export default function Home() {
   const form = useRef(null);
   //metode til at få vist "flere sider" ligesom i matasquizzen
-  const [visible, setVisible] = useState(1);
+  const [visible, setVisible] = useState(3);
 
   //states og objects til CHOOSE TICKETS------------------------------------------------------------
   //arrayet der holder styr på antal af hendholdvis regular- samt vip-tickets
@@ -114,7 +114,7 @@ export default function Home() {
   // console.log("dette er twoPers", threePers);
 
   //Hvis man medbringer sit eget telt, er dette state true
-  const [bringYourOwn, setBringYourOwn] = useState(false);
+  const [tentOption, setTentOption] = useState("");
 
   //State der holder styr på om GREEN CAMPING  er valgt eller ikke
   const [greenCamping, setGreenCamping] = useState(false);
@@ -211,35 +211,39 @@ export default function Home() {
         </section>
       )}
       {visible === 3 && (
-        <section>
+        <section className="">
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>CHOOSE A TENT OPTION</h3>
-          <form action="">
-            <TentRadioBtnOne name="tentoption" id="CrewTents" text="CREW TENTS" beregnTelte={beregnTelte} setBringYourOwn={setBringYourOwn}></TentRadioBtnOne>
-            <TentRadioBtnTwo name="tentoption" id="BringYourOwn" text="BRING YOUR OWN" setTwoPers={setTwoPers} setThreePers={setThreePers} setBringYourOwn={setBringYourOwn}></TentRadioBtnTwo>
-            <p>Do your group want to get a quiet spot closer to the green forrest? Add the Green Camping option</p>
-            <input
-              type="checkbox"
-              checked={greenCamping}
-              onChange={() => {
-                setGreenCamping((old) => !old);
-              }}
-            />
-            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} bringYourOwn={bringYourOwn} />
-            <PrimaryButton
-              onClick={() => {
-                //Vi tilføjer vores states som items til dataObj
-                dataObj.regular = ticket.regular;
-                dataObj.vip = ticket.vip;
-                dataObj.amount = ticketAmount;
-                dataObj.campingspot = chosenSpot;
-                dataObj.two_pers_tent = twoPers;
-                dataObj.three_pers_tent = threePers;
-                dataObj.greenCamping = greenCamping;
-                console.log("dette er dataObjekt", dataObj);
-                setVisible((o) => o + 1);
-              }}
-            />
+          <form action="" className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
+            <div>
+              <TentRadioBtnOne name="tentoption" id="CrewTents" text="CREW TENTS" beregnTelte={beregnTelte} tentOption={tentOption} setTentOption={setTentOption}></TentRadioBtnOne>
+              <TentRadioBtnTwo name="tentoption" id="BringYourOwn" text="BRING YOUR OWN" setTwoPers={setTwoPers} setThreePers={setThreePers} tentOption={tentOption} setTentOption={setTentOption}></TentRadioBtnTwo>
+              <p>Do your group want to get a quiet spot closer to the green forrest? Add the Green Camping option</p>
+              <input
+                type="checkbox"
+                checked={greenCamping}
+                onChange={() => {
+                  setGreenCamping((old) => !old);
+                }}
+              />
+            </div>
+            <div className="w-full justify-self-end">
+              <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOption={tentOption} />
+              <PrimaryButton
+                onClick={() => {
+                  //Vi tilføjer vores states som items til dataObj
+                  dataObj.regular = ticket.regular;
+                  dataObj.vip = ticket.vip;
+                  dataObj.amount = ticketAmount;
+                  dataObj.campingspot = chosenSpot;
+                  dataObj.two_pers_tent = twoPers;
+                  dataObj.three_pers_tent = threePers;
+                  dataObj.greenCamping = greenCamping;
+                  console.log("dette er dataObjekt", dataObj);
+                  setVisible((o) => o + 1);
+                }}
+              />
+            </div>
           </form>
         </section>
       )}
