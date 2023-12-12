@@ -6,14 +6,14 @@
 //Hvis inputet skal have en minLength eller maxLength kan dette tilføjes
 //Hvis der skal ske et event, når der tastet i feltet, kan onKeyDown tilføjes (bliver brugt i Cardinfo.jsx)
 
-export default function Labelinput({ id, inputname, label, placeholder, type, forId, extraStyle, refName, maxLength, minLength, onKeyDown }) {
+export default function Labelinput({ id, inputname, label, placeholder, type, extraStyle, refName, maxLength, minLength, onKeyDown }) {
   return (
     <div className={`flex flex-col my-6 max-w-lg ${extraStyle}`}>
-      <label className="text-[var(--secondary-color)] semibold" htmlFor={forId}>
+      <label className="text-[var(--secondary-color)] semibold mb-2" htmlFor={id}>
         {label}{" "}
       </label>
       <input
-        className="bg-[var(--primary-color)] outline-none text-[var(--secondary-color)] p-4 outline focus:outline-[3px] outline-[var(--accent-color)]"
+        className="bg-[var(--primary-color)] outline-none text-[var(--secondary-color)] p-4 outline-1 focus:outline-[3px] outline-[var(--accent-color)]"
         id={id}
         placeholder={placeholder}
         name={inputname}

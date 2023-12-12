@@ -20,42 +20,45 @@ export default function Dob() {
     }
   }
   return (
-    <div className="flex flex-row gap-4 max-w-lg justify-between">
-      <div className="flex flex-col shrink  my-6 w-1/4">
-        <label className="text-[var(--secondary-color)] w-fit semibold" htmlFor="day">
-          DAY
-        </label>
-        <input
-          className="w-full bg-[var(--primary-color)] outline-none text-[var(--secondary-color)] p-4 outline focus:outline-[3px] outline-[var(--accent-color)]"
-          id="day"
-          placeholder="dd"
-          name="day"
-          type="text"
-          maxLength="2"
-          onChange={changeFocus}
-        />
+    <>
+      <p className="text-[var(--secondary-color)] text-[16px] font-normal">DATE OF BIRTH</p>
+      <div className="flex flex-row gap-4 max-w-lg justify-between">
+        <div className="flex flex-col shrink mb-6 mt-1 w-1/4">
+          <label className="text-[var(--secondary-color)] w-fit semibold text-[#c1bebe]" htmlFor="day">
+            DAY
+          </label>
+          <input
+            className="w-full bg-[var(--primary-color)] outline-1 text-[var(--secondary-color)] p-4 outline focus:outline-[3px] outline-[var(--accent-color)]"
+            id="day"
+            placeholder="DD"
+            name="day"
+            type="text"
+            maxLength="2"
+            onChange={changeFocus}
+          />
+        </div>
+        <div className="flex flex-col shrink mb-6 mt-1 w-1/4">
+          <label className="text-[var(--secondary-color)] w-fit semibold text-[#c1bebe]" htmlFor="month">
+            MONTH
+          </label>
+          <input
+            className="w-full bg-[var(--primary-color)] outline-1 text-[var(--secondary-color)] p-4 outline focus:outline-[3px] outline-[var(--accent-color)]"
+            id="month"
+            placeholder="MM"
+            name="month"
+            type="text"
+            maxLength="2"
+            ref={monthRef}
+            onChange={changeFocus}
+          />
+        </div>
+        <div className="flex flex-col shrink mb-6 mt-1 w-2/4">
+          <label className="text-[var(--secondary-color)] w-fit semibold text-[#c1bebe]" htmlFor="year">
+            YEAR
+          </label>
+          <input className="w-full bg-[var(--primary-color)] outline-1 text-[var(--secondary-color)] p-4 outline focus:outline-[3px] outline-[var(--accent-color)]" id="year" placeholder="YYYY" name="year" type="text" maxLength="4" ref={yearRef} />
+        </div>
       </div>
-      <div className="flex flex-col shrink my-6 w-1/4">
-        <label className="text-[var(--secondary-color)] w-fit semibold" htmlFor="month">
-          MONTH
-        </label>
-        <input
-          className="w-full bg-[var(--primary-color)] outline-none text-[var(--secondary-color)] p-4 outline focus:outline-[3px] outline-[var(--accent-color)]"
-          id="month"
-          placeholder="mm"
-          name="month"
-          type="text"
-          maxLength="2"
-          ref={monthRef}
-          onChange={changeFocus}
-        />
-      </div>
-      <div className="flex flex-col shrink my-6 w-2/4">
-        <label className="text-[var(--secondary-color)] w-fit semibold" htmlFor="year">
-          YEAR
-        </label>
-        <input className="w-full bg-[var(--primary-color)] outline-none text-[var(--secondary-color)] p-4 outline focus:outline-[3px] outline-[var(--accent-color)]" id="year" placeholder="yyyy" name="year" type="text" maxLength="4" ref={yearRef} />
-      </div>
-    </div>
+    </>
   );
 }

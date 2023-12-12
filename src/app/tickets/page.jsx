@@ -9,6 +9,10 @@ import HeaderTwo from "@/components/HeaderTwo";
 import RadioBtn from "@/components/RadioBtn";
 import TentRadioBtnOne from "@/components/TentRadioBtnOne";
 import TentRadioBtnTwo from "@/components/TentRadioBtnTwo";
+import Labelinput from "@/components/Labelinput";
+import Dob from "@/components/Dob";
+import EkstraTicket from "@/components/EkstraTicket";
+import Cardinfo from "@/components/Cardinfo";
 
 // import Link from "@/components/Link";
 
@@ -24,7 +28,7 @@ export default function Home() {
 
   // Dette objekt bliver det komplette objekt med alle opsamlede værdier
   let dataObj = {};
-  console.log(dataObj);
+  // console.log(dataObj);
   // Dette objekt, bliver objektet der sendes i PUT-requesten
   let putDataObj = {};
 
@@ -36,21 +40,21 @@ export default function Home() {
   //states og objects til CHOOSE CAMPINGSPOTS------------------------------------------------------
   const [chosenSpot, setChosenSpot] = useState("");
 
-  console.log(chosenSpot);
+  // console.log(chosenSpot);
 
   //Her tjekker den om required er opfyldt i CHOOSE CAMPINGSPOTS, når submit knappen trykkes på i dens form
   function validateCampspot() {
     // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
     putDataObj.area = chosenSpot;
     putDataObj.amount = ticketAmount;
-    console.log("dette er PUTobjektet", putDataObj);
+    // console.log("dette er PUTobjektet", putDataObj);
     sendPutRequest();
 
     dataObj.regular = ticket.regular;
     dataObj.vip = ticket.vip;
     dataObj.amount = ticketAmount;
     dataObj.campingspot = chosenSpot;
-    console.log("dette er dataObjekt", dataObj);
+    // console.log("dette er dataObjekt", dataObj);
 
     setVisible((o) => o + 1);
   }
@@ -86,7 +90,8 @@ export default function Home() {
     });
     // Har ændret koden fra at være ".text()" til ".json()", så objektet der udskrives er json
     let data = await response.json();
-    console.log(data);
+    //data indeholder vores Id, som skal postes
+    // console.log(data);
   }
 
   //states og objects til CHOOSE TENT OPTION-------------------------------------------------------
@@ -119,6 +124,13 @@ export default function Home() {
   //State der holder styr på om GREEN CAMPING  er valgt eller ikke
   const [greenCamping, setGreenCamping] = useState(false);
   // console.log(greenCamping);
+
+  //states og objects til PERSONAL INFORMATION-------------------------------------------------------
+
+  //For at vide hvor mange ekstra personer, der er udover køberen selv, skal vi fjerne én billet fra det samlede antal billetter (i ticketArray) med pop.
+  // Så har vi et array med et antal items, der passer til antallet af ekstra personer udover køberen.
+  // Vi laver lige en kopi i stedet for at modificere det originale array
+  let copyTicketArray = ticketArray;
 
   return (
     <Layout>
@@ -179,6 +191,7 @@ export default function Home() {
             <YourPurchase ticket={ticket} twoPers={twoPers} threePers={threePers} />
           </div>
           <PrimaryButton
+            text="NEXT"
             onClick={() => {
               setVisible((o) => o + 1);
             }}
@@ -197,11 +210,12 @@ export default function Home() {
             <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Alfheim" text="ALFHEIM" ticketAmount={ticketAmount}></RadioBtn>
             <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} />
             <PrimaryButton
+              text="NEXT"
               onClick={() => {
                 // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
                 putDataObj.area = chosenSpot;
                 putDataObj.amount = ticketAmount;
-                console.log("dette er PUTobjektet", putDataObj);
+                // console.log("dette er PUTobjektet", putDataObj);
                 sendPutRequest();
 
                 setVisible((o) => o + 1);
@@ -227,6 +241,48 @@ export default function Home() {
             />
             <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} bringYourOwn={bringYourOwn} />
             <PrimaryButton
+              text="NEXT"
+              onClick={() => {
+                //For at vide hvor mange ekstra personer, der er udover køberen selv, skal vi fjerne én billet fra det samlede antal billetter (i ticketArray) med pop. Efter pop, har vi altså et array med et antal items, der passer til antallet af ekstra personer udover køberen.
+                // Hér arbejder vi med kopien
+                copyTicketArray.pop();
+
+                setVisible((o) => o + 1);
+              }}
+            />
+          </form>
+        </section>
+      )}
+      {visible === 4 && (
+        <section>
+          <HeaderTwo page="Checkout"></HeaderTwo>
+          <h3>PERSONAL INFORMATION</h3>
+          <form action="">
+            <div>
+              <div tabIndex={0} className="collapse bg-[var(--primary-color)] collapse-arrow border border-[var(--accent-color)] rounded-none">
+                <input type="checkbox" />
+                <div className="collapse-title text-[var(--secondary-color)] text-xl md:text-4xl">YOUR INFORMATION</div>
+                <div className="collapse-content">
+                  <Labelinput label="FIRSTNAME" placeholder="EX. PETER"></Labelinput>
+                  <Labelinput label="LASTNAME" placeholder="EX. THOMSON"></Labelinput>
+                  <Dob></Dob>
+                  <Labelinput label="ADRESS" placeholder="EX. STENSTYKKEVEJ, 62"></Labelinput>
+                  <Labelinput label="ZIPCODE" placeholder="EX. 2650"></Labelinput>
+                  <Labelinput label="CITY" placeholder="EX. HVIDOVRE"></Labelinput>
+                  <Labelinput label="EMAIL" placeholder="EX. THOMSON@HOTMAIL.COM"></Labelinput>
+                  <Labelinput label="TELEPHONE NR." placeholder="TELEPHONE NR.FIIIIIIX!!!"></Labelinput>
+                </div>
+              </div>
+            </div>
+            {/*Hér mapper vi igennem copyTicketArray og sørger for at returnere en EkstraTicket-komponent for hver item der er i vores copyTicketArray*/}
+            {copyTicketArray.map((item) => {
+              const uniqueId = Math.random();
+              return <EkstraTicket id={uniqueId} key={uniqueId}></EkstraTicket>;
+            })}
+
+            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} bringYourOwn={bringYourOwn} />
+            <PrimaryButton
+              text="NEXT"
               onClick={() => {
                 //Vi tilføjer vores states som items til dataObj
                 dataObj.regular = ticket.regular;
@@ -236,7 +292,23 @@ export default function Home() {
                 dataObj.two_pers_tent = twoPers;
                 dataObj.three_pers_tent = threePers;
                 dataObj.greenCamping = greenCamping;
-                console.log("dette er dataObjekt", dataObj);
+                // console.log("dette er dataObjekt", dataObj);
+                setVisible((o) => o + 1);
+              }}
+            />
+          </form>
+        </section>
+      )}
+      {visible === 5 && (
+        <section>
+          <HeaderTwo page="Checkout"></HeaderTwo>
+          <h3>CHOOSE PAYMENT</h3>
+          <form action="">
+            <Cardinfo></Cardinfo>
+            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} bringYourOwn={bringYourOwn} />
+            <PrimaryButton
+              text="NEXT"
+              onClick={() => {
                 setVisible((o) => o + 1);
               }}
             />
