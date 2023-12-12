@@ -20,7 +20,7 @@ import Cardinfo from "@/components/Cardinfo";
 export default function Home() {
   const form = useRef(null);
   //metode til at få vist "flere sider" ligesom i matasquizzen
-  const [visible, setVisible] = useState(1);
+  const [visible, setVisible] = useState(3);
 
   //states og objects til CHOOSE TICKETS------------------------------------------------------------
   //arrayet der holder styr på antal af hendholdvis regular- samt vip-tickets
@@ -300,6 +300,7 @@ export default function Home() {
             <div>
               <TentRadioBtnOne name="tentoption" id="CrewTents" text="CREW TENTS" beregnTelte={beregnTelte} tentOption={tentOption} setTentOption={setTentOption}></TentRadioBtnOne>
               <TentRadioBtnTwo name="tentoption" id="BringYourOwn" text="BRING YOUR OWN" setTwoPers={setTwoPers} setThreePers={setThreePers} tentOption={tentOption} setTentOption={setTentOption}></TentRadioBtnTwo>
+              <p>Do your group want to get a quiet spot closer to the green forrest? Add the Green Camping option</p>
               <GreenCamping greenCamping={greenCamping} setGreenCamping={setGreenCamping} />
             </div>
             <div className="w-full justify-self-end">

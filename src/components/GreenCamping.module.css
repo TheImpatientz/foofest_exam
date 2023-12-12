@@ -11,4 +11,6 @@
 }
 .checkbox:checked {
   background-color: var(--accent-color);
+  background-image: url("../logo/checkbox_check.svg");
+  background-size: cover;
 }
