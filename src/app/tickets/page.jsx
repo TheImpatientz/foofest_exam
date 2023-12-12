@@ -211,15 +211,16 @@ export default function Home() {
             <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Alfheim" text="ALFHEIM" ticketAmount={ticketAmount}></RadioBtn>
             <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} />
             <PrimaryButton
-            // onClick={() => {
-            //   // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
-            //   putDataObj.area = chosenSpot;
-            //   putDataObj.amount = ticketAmount;
-            //   console.log("dette er PUTobjektet", putDataObj);
-            //   sendPutRequest();
+              text="NEXT"
+              // onClick={() => {
+              //   // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
+              //   putDataObj.area = chosenSpot;
+              //   putDataObj.amount = ticketAmount;
+              //   console.log("dette er PUTobjektet", putDataObj);
+              //   sendPutRequest();
 
-            //   setVisible((o) => o + 1);
-            // }}
+              //   setVisible((o) => o + 1);
+              // }}
             />
           </form>
         </section>
@@ -238,13 +239,13 @@ export default function Home() {
               <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOption={tentOption} />
               <PrimaryButton
                 text="NEXT"
-                // onClick={() => {
-                //   //For at vide hvor mange ekstra personer, der er udover køberen selv, skal vi fjerne én billet fra det samlede antal billetter (i ticketArray) med pop. Efter pop, har vi altså et array med et antal items, der passer til antallet af ekstra personer udover køberen.
-                //   // Hér arbejder vi med kopien
-                //   copyTicketArray.pop();
+                onClick={() => {
+                  //For at vide hvor mange ekstra personer, der er udover køberen selv, skal vi fjerne én billet fra det samlede antal billetter (i ticketArray) med pop. Efter pop, har vi altså et array med et antal items, der passer til antallet af ekstra personer udover køberen.
+                  // Hér arbejder vi med kopien
+                  copyTicketArray.pop();
 
-                //   setVisible((o) => o + 1);
-                // }}
+                  setVisible((o) => o + 1);
+                }}
               />
             </div>
           </form>
@@ -277,7 +278,7 @@ export default function Home() {
               return <EkstraTicket id={uniqueId} key={uniqueId}></EkstraTicket>;
             })}
 
-            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} bringYourOwn={bringYourOwn} />
+            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOptionn={tentOption} />
             <PrimaryButton
               text="NEXT"
               onClick={() => {
@@ -302,7 +303,7 @@ export default function Home() {
           <h3>CHOOSE PAYMENT</h3>
           <form action="">
             <Cardinfo></Cardinfo>
-            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} bringYourOwn={bringYourOwn} />
+            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOptionn={tentOption} />
             <PrimaryButton
               text="NEXT"
               onClick={() => {
