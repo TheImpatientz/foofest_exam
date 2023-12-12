@@ -101,11 +101,11 @@ export default function Cardinfo() {
         {/* Hvis card payment er valgt skal nedestående dukke op */}
         {isChecked === "card" && (
           <div className="flex flex-col px-4 w-full">
-            <Labelinput forId="cardname" id="cardname" label="CARD HOLDER NAME" type="text" extraStyle="w-full" />
-            <Labelinput forId="cardnumber" id="cardnumber" label="CARD NUMBER" type="numeric" extraStyle="w-full" maxLength={19} minLength={19} onKeyDown={cardNumberLayout} keyboardtype="numeric" />
+            <Labelinput forId="cardname" id="cardname" label="CARD HOLDER NAME" placeholder="PETER THOMSON" type="text" extraStyle="w-full" />
+            <Labelinput forId="cardnumber" id="cardnumber" placeholder="2571 6584 3321 5869" label="CARD NUMBER" type="text" extraStyle="w-full" maxLength={19} minLength={19} onKeyDown={cardNumberLayout} keyboardtype="numeric" />
             <div className="flex justify-between w-full max-w-lg">
-              <Labelinput forId="expirydate" id="expirydate" label="EXPIRY DATE" type="numeric" placeholder="mm/yy" extraStyle="w-40" refName={expiryDateRef} maxLength={5} minLength={5} onKeyDown={dateLayout} />
-              <Labelinput forId="cvc" id="cvc" label="CVV / CVC" type="numeric" placeholder="" extraStyle="w-24" refName={cvcRef} maxLength={3} />
+              <Labelinput forId="expirydate" id="expirydate" label="EXPIRY DATE" type="text" placeholder="MM/YY" extraStyle="w-40" refName={expiryDateRef} maxLength={5} minLength={5} onKeyDown={dateLayout} />
+              <Labelinput forId="cvc" id="cvc" label="CVV / CVC" type="text" placeholder="EX. 568" extraStyle="w-24" refName={cvcRef} maxLength={3} />
             </div>
           </div>
         )}
