@@ -1,5 +1,5 @@
 // ticket bliver sendt med til barnet, så vi kan gribe fat i værdierne, der befinder sig i objektet
-export default function YourPurchase({ campingspot, ticket, twoPers, threePers, greenCamping, bringYourOwn }) {
+export default function YourPurchase({ campingspot, ticket, twoPers, threePers, greenCamping, tentOption }) {
   return (
     <div className="outline outline-[var(--accent-color)] outline-1 p-7 mb-2 font-semibold">
       <h4 className="pb-9">YOUR PURCHASE</h4>
@@ -33,7 +33,7 @@ export default function YourPurchase({ campingspot, ticket, twoPers, threePers, 
         </div>
       )}
 
-      {bringYourOwn === true && (
+      {tentOption === "bringOwn" && (
         <div className="flex justify-between pt-7 ">
           <p>BRING YOUR OWN</p>
           <p className="">0 DKK</p>
