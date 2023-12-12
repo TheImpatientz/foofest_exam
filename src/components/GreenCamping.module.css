@@ -1,0 +1,14 @@
+/* .radio er givet til vores input felt. Her fjernes der default styling og tilføjes nyt */
+.checkbox {
+  appearance: none;
+  background-color: transparent;
+  border: 1px solid var(--accent-color);
+  display: inline-block;
+  cursor: pointer;
+}
+.checkbox:hover {
+  background-color: var(--accent-color);
+}
+.checkbox:checked {
+  background-color: var(--accent-color);
+}

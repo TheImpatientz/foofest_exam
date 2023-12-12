@@ -9,13 +9,14 @@ import HeaderTwo from "@/components/HeaderTwo";
 import RadioBtn from "@/components/RadioBtn";
 import TentRadioBtnOne from "@/components/TentRadioBtnOne";
 import TentRadioBtnTwo from "@/components/TentRadioBtnTwo";
+import GreenCamping from "@/components/GreenCamping";
 
 // import Link from "@/components/Link";
 
 export default function Home() {
   const form = useRef(null);
   //metode til at få vist "flere sider" ligesom i matasquizzen
-  const [visible, setVisible] = useState(3);
+  const [visible, setVisible] = useState(1);
 
   //states og objects til CHOOSE TICKETS------------------------------------------------------------
   //arrayet der holder styr på antal af hendholdvis regular- samt vip-tickets
@@ -197,15 +198,15 @@ export default function Home() {
             <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Alfheim" text="ALFHEIM" ticketAmount={ticketAmount}></RadioBtn>
             <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} />
             <PrimaryButton
-              onClick={() => {
-                // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
-                putDataObj.area = chosenSpot;
-                putDataObj.amount = ticketAmount;
-                console.log("dette er PUTobjektet", putDataObj);
-                sendPutRequest();
+            // onClick={() => {
+            //   // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
+            //   putDataObj.area = chosenSpot;
+            //   putDataObj.amount = ticketAmount;
+            //   console.log("dette er PUTobjektet", putDataObj);
+            //   sendPutRequest();
 
-                setVisible((o) => o + 1);
-              }}
+            //   setVisible((o) => o + 1);
+            // }}
             />
           </form>
         </section>
@@ -218,14 +219,7 @@ export default function Home() {
             <div>
               <TentRadioBtnOne name="tentoption" id="CrewTents" text="CREW TENTS" beregnTelte={beregnTelte} tentOption={tentOption} setTentOption={setTentOption}></TentRadioBtnOne>
               <TentRadioBtnTwo name="tentoption" id="BringYourOwn" text="BRING YOUR OWN" setTwoPers={setTwoPers} setThreePers={setThreePers} tentOption={tentOption} setTentOption={setTentOption}></TentRadioBtnTwo>
-              <p>Do your group want to get a quiet spot closer to the green forrest? Add the Green Camping option</p>
-              <input
-                type="checkbox"
-                checked={greenCamping}
-                onChange={() => {
-                  setGreenCamping((old) => !old);
-                }}
-              />
+              <GreenCamping greenCamping={greenCamping} setGreenCamping={setGreenCamping} />
             </div>
             <div className="w-full justify-self-end">
               <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOption={tentOption} />
