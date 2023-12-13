@@ -22,10 +22,19 @@ export default function Home() {
   //metode til at få vist "flere sider" ligesom i matasquizzen
   const [visible, setVisible] = useState(1);
 
+  //Denne function tager brugeren til toppen af siden. Funktionen bliver kaldt når der "skiftes side" på siden.
+  function scrollToTop() {
+    //Her har vi benyttet ChatGPT til at få hjælp til at finde en smart måde at scrolle på til toppen af vinduet.
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
   //states og objects til CHOOSE TICKETS------------------------------------------------------------
   //arrayet der holder styr på antal af hendholdvis regular- samt vip-tickets
   const [ticket, setTicket] = useState({ regular: 0, vip: 0 });
-  // console.log("ticket er", ticket);
+  const [hidden, setHidden] = useState(true); //State til at  styre hvorvidt alert message skal være hidden eller ej
 
   // Dette objekt bliver det komplette objekt med alle opsamlede værdier
   let dataObj = {};
@@ -33,7 +42,7 @@ export default function Home() {
   // Dette objekt, bliver objektet der sendes i PUT-requesten
   let putDataObj = {};
 
-  //KOMMENTAR: dette array skal holde styr på, hvor mange tickets der er bestilt, så vi til sidst kan map'e over antallet  og tildele korrekt antal telte (hvis man vælger "CREW TENTS" samt lave x antal "ekstra tickets".
+  //Dette array skal holde styr på, hvor mange tickets der er bestilt, så vi til sidst kan map'e over antallet  og tildele korrekt antal telte (hvis man vælger "CREW TENTS" samt lave x antal "ekstra tickets".
   //   Der bliver tilføjer "ticket" til arrayet
   const [ticketArray, setTicketArray] = useState([]);
   // console.log(ticketArray);
@@ -41,16 +50,14 @@ export default function Home() {
   //states og objects til CHOOSE CAMPINGSPOTS------------------------------------------------------
   const [chosenSpot, setChosenSpot] = useState("");
 
-  // console.log(chosenSpot);
-
   //Her tjekker den om required er opfyldt i CHOOSE CAMPINGSPOTS, når submit knappen trykkes på i dens form
   function validateCampspot() {
-    // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
+    // Tilføjer chosenSpot og ticketAmount til vores putDataObj, da dette sendes i PUT-requesten
     putDataObj.area = chosenSpot;
     putDataObj.amount = ticketAmount;
     // console.log("dette er PUTobjektet", putDataObj);
     sendPutRequest();
-
+    scrollToTop();
     setVisible((o) => o + 1);
   }
 
@@ -213,13 +220,13 @@ export default function Home() {
     <Layout>
       {/* I denne section har vi ikke noget form-tag, da vi ikke bruger inputfelter på den første "side". Derimod samler vi data i et object, når der klikkes next */}
       {visible === 1 && (
-        <section>
+        <section className="md:relative">
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>CHOOSE TICKETS</h3>
-          <div className="">
-            <div className="outline outline-[var(--accent-color)] outline-1 p-5 mb-12">
-              <div className="grid grid-cols-[145px,_1fr,_1fr] place-items-center mb-8">
-                <p className="justify-self-start">REGULAR TICKET</p>
+          <div className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
+            <div className="outline outline-[var(--accent-color)] outline-1 p-5 md:p-6 mb-12 w-full h-fit">
+              <div className="grid grid-cols-4 place-items-center mb-8 md:mb-10">
+                <p className="justify-self-start col-start-1 col-span-2">REGULAR TICKET</p>
                 <Plusminus
                   //sender en prop ned til Plusminus. Funktionen vil add' et tal til 'regular ticket'
                   updateTicketAdd={function updateTickets() {
@@ -241,8 +248,8 @@ export default function Home() {
                 />
                 <p className="justify-self-end">799,-</p>
               </div>
-              <div className="grid grid-cols-[145px,_1fr,_1fr] place-items-center">
-                <p className="justify-self-start">VIP TICKET</p>
+              <div className="grid grid-cols-4 place-items-center">
+                <p className="justify-self-start col-start-1 col-span-2">VIP TICKET</p>
                 <Plusminus
                   //sender en prop med til Plusminus. Funktionen vil add' et tal til 'regular ticket' eller trække et tal fra
                   updateTicketAdd={function updateTickets() {
@@ -263,16 +270,30 @@ export default function Home() {
                 />
                 <p className="justify-self-end">1299,-</p>
               </div>
+              <div role="alert" className={`alert rounded-none bg-[var(--primary-color)] border-none w-fit p-0 pt-4 ${hidden ? "hidden" : "flex"}`}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-[var(--accent-color)] shrink-0 w-6 h-6">
+                  <path fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <p className="text-[var(--secondary-color)]">Please choose the ticket amount</p>
+              </div>
             </div>
-            {/* Her sendes ticket (som er et objekt) ned til YourPurchase, så jeg senerehen kan få fat i regular samt vip-værdierne */}
-            <YourPurchase ticket={ticket} twoPers={twoPers} threePers={threePers} />
+            <div className="w-full md:w-full justify-self-end md:sticky md:top-6 md:h-fit">
+              {/* Her sendes ticket (som er et objekt) ned til YourPurchase, så jeg senerehen kan få fat i regular samt vip-værdierne */}
+              <YourPurchase ticket={ticket} twoPers={twoPers} threePers={threePers} />
+              <PrimaryButton
+                text="NEXT"
+                onClick={() => {
+                  if (ticketAmount > 0) {
+                    setVisible((o) => o + 1);
+                    scrollToTop();
+                  } else {
+                    setHidden(false);
+                    scrollToTop();
+                  }
+                }}
+              />
+            </div>
           </div>
-          <PrimaryButton
-            text="NEXT"
-            onClick={() => {
-              setVisible((o) => o + 1);
-            }}
-          />
         </section>
       )}
       {visible === 2 && (
