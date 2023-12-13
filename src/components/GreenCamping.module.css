@@ -6,10 +6,9 @@
   display: inline-block;
   cursor: pointer;
 }
+
+.checkbox:checked,
 .checkbox:hover {
-  background-color: var(--accent-color);
-}
-.checkbox:checked {
   background-color: var(--accent-color);
   background-image: url("../logo/checkbox_check.svg");
   background-size: cover;

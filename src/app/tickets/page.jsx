@@ -51,12 +51,6 @@ export default function Home() {
     // console.log("dette er PUTobjektet", putDataObj);
     sendPutRequest();
 
-    dataObj.regular = ticket.regular;
-    dataObj.vip = ticket.vip;
-    dataObj.amount = ticketAmount;
-    dataObj.campingspot = chosenSpot;
-    // console.log("dette er dataObjekt", dataObj);
-
     setVisible((o) => o + 1);
   }
 
@@ -102,19 +96,29 @@ export default function Home() {
 
   //beregnTelte sørger for at tildele korrekt antal telte til køberen, som herefter kan vises i YOUR PURCHASE
   function beregnTelte() {
-    if (ticketAmount === 2) {
-      setTwoPers((old) => old + 1);
+    if (ticketAmount === 1 || ticketAmount === 2) {
+      setTwoPers(1);
     } else if (ticketAmount === 3) {
-      setThreePers((old) => old + 1);
+      setThreePers(1);
     } else if (ticketAmount === 4) {
-      setTwoPers((old) => old + 2);
+      setTwoPers(2);
     } else if (ticketAmount === 5) {
-      setTwoPers((old) => old + 1);
-      setThreePers((old) => old + 1);
+      setTwoPers(1);
+      setThreePers(1);
     } else if (ticketAmount === 6) {
-      setThreePers((old) => old + 2);
+      setThreePers(2);
+    } else if (ticketAmount === 7) {
+      setTwoPers(2);
+      setThreePers(1);
+    } else if (ticketAmount === 8) {
+      setTwoPers(1);
+      setThreePers(2);
+    } else if (ticketAmount === 9) {
+      setThreePers(3);
+    } else if (ticketAmount === 10) {
+      setTwoPers(2);
+      setThreePers(2);
     }
-    //indtil man har valgt 10 billetter
   }
   // console.log("dette er twoPers", twoPers);
   // console.log("dette er twoPers", threePers);
@@ -125,6 +129,11 @@ export default function Home() {
   //State der holder styr på om GREEN CAMPING  er valgt eller ikke
   const [greenCamping, setGreenCamping] = useState(false);
   // console.log(greenCamping);
+  function validateTent() {
+    copyTicketArray.pop();
+
+    setVisible((o) => o + 1);
+  }
 
   //states og objects til PERSONAL INFORMATION-------------------------------------------------------
 
@@ -143,7 +152,6 @@ export default function Home() {
     dataObj.three_pers_tent = threePers;
     dataObj.greenCamping = greenCamping;
     // console.log("dette er dataObjekt", dataObj);
-
     //Her sørger vi for (ved hver const) at fange/get (PERSONAL INFORMATION) inputfeltets data. Efterfølgende putter vi det ind i vores dataObj (objekt)
     const firstname = formData.get("firstname");
     dataObj.firstname = firstname;
@@ -293,28 +301,19 @@ export default function Home() {
         </section>
       )}
       {visible === 3 && (
-        <section className="">
+        <section className="md:relative">
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>CHOOSE A TENT OPTION</h3>
-          <form action="" className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
+          <form action={validateTent} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
             <div>
               <TentRadioBtnOne name="tentoption" id="CrewTents" text="CREW TENTS" beregnTelte={beregnTelte} tentOption={tentOption} setTentOption={setTentOption}></TentRadioBtnOne>
               <TentRadioBtnTwo name="tentoption" id="BringYourOwn" text="BRING YOUR OWN" setTwoPers={setTwoPers} setThreePers={setThreePers} tentOption={tentOption} setTentOption={setTentOption}></TentRadioBtnTwo>
-              <p>Do your group want to get a quiet spot closer to the green forrest? Add the Green Camping option</p>
+              <p className="max-w-lg">Do your group want to get a quiet spot closer to the green forrest? Add the Green Camping option</p>
               <GreenCamping greenCamping={greenCamping} setGreenCamping={setGreenCamping} />
             </div>
-            <div className="w-full justify-self-end">
+            <div className="w-full md:w-full justify-self-end md:sticky md:top-6 md:h-fit">
               <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOption={tentOption} />
-              <PrimaryButton
-                text="NEXT"
-                onClick={() => {
-                  //For at vide hvor mange ekstra personer, der er udover køberen selv, skal vi fjerne én billet fra det samlede antal billetter (i ticketArray) med pop. Efter pop, har vi altså et array med et antal items, der passer til antallet af ekstra personer udover køberen.
-                  // Hér arbejder vi med kopien
-                  copyTicketArray.pop();
-
-                  setVisible((o) => o + 1);
-                }}
-              />
+              <PrimaryButton text="NEXT" />
             </div>
           </form>
         </section>
