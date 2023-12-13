@@ -200,7 +200,7 @@ export default function Home() {
     console.log("dette er objektet", dataObj);
 
     postOrder(dataObj);
-
+    scrollToTop();
     setVisible((o) => o + 1);
   }
 
@@ -220,6 +220,12 @@ export default function Home() {
 
     let answer = await response.json();
     return answer;
+  }
+
+  //validering til CHOOSE PAYMENT -------------------------------------------------------
+  function validatePayment() {
+    scrollToTop();
+    setVisible((o) => o + 1);
   }
 
   return (
@@ -395,18 +401,16 @@ export default function Home() {
         <section>
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>CHOOSE PAYMENT</h3>
-          <form action="">
+          <form action={validatePayment} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
             <Cardinfo></Cardinfo>
-            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOption={tentOption} />
-            <PrimaryButton
-              text="NEXT"
-              onClick={() => {
-                setVisible((o) => o + 1);
-              }}
-            />
+            <div className="w-full md:w-full justify-self-end md:sticky md:top-6 md:h-fit">
+              <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOption={tentOption} />
+              <PrimaryButton text="CHECK OUT" />
+            </div>
           </form>
         </section>
       )}
+      {visible === 6 && <p>her skal tak for din bestilling siden være</p>}
     </Layout>
   );
 }

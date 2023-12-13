@@ -15,37 +15,34 @@ export default function Cardinfo() {
   const cvcRef = useRef(null);
 
   //Holder styr på om hvilken payment der er valgt
-  const [isChecked, setIsChecked] = useState("");
+  const [isChecked, setIsChecked] = useState("card");
+  const defaultCheck = isChecked === "card" ? true : false;
 
   //cardNumberLayout sørger for feltet laver mellemrum mellem hver fjerde tal og skifter fokus ved fuld længde
   function cardNumberLayout(e) {
-    //Tager hvad der er skrevet i feltet indtil videre
-    let value = e.target.value;
-
-    //Hvis brugeren prøver at skrive tegn ind, der ikke er et nummer, vil det bliver erstattet med ingenting (en tom string "")
-    value = value.replace(/[^0-9\s]/g, "");
+    let value = e.target.value; //Tager hvad der er skrevet i feltet indtil videre
+    value = value.replace(/[^0-9\s]/g, ""); //Hvis brugeren prøver at skrive tegn ind, der ikke er et nummer, vil det bliver erstattet med ingenting (en tom string "")
 
     // Ved hver fjerde tal skal der indsættes mellemrum
     if (e.target.value.length === 4 || e.target.value.length === 9 || e.target.value.length === 14) {
       value = e.target.value + " ";
     }
 
-    // Opdatere input´s value
-    e.target.value = value;
+    e.target.value = value; // Opdatere input´s value
 
     //Hvis den fulde længde i et kortnummer er nået skal fokus skifte til næste felt. (e.key !== "Backspace" sørger for der kan slettes i feltet selvom der er en fuld længde)
     if (e.key !== "Backspace" && e.target.value.length === 19) {
       expiryDateRef.current.focus();
     }
-    //ANDEN LØSNING TIL PROBLEM MED SLETNING: Hvis brugeren begynder at slette, skal alle mellemrum slettes, så det er muligt for brugeren at slette tal før mellemrummene
-    // if (e.key === "Backspace") {
-    //   value = value.replaceAll(" ", "");
-    // }
   }
 
   //dateLayout sørger for at expiry feltet har et / i midten og skifter fokus til næste felt ved fuld længde
   function dateLayout(e) {
+    console.log("hallo");
     //Sætter / efter tal nummer to
+    // if (e.target.value.length === 0) {
+    //   e.target.value = e.target.value + "M/YY";
+    // }
     if (e.target.value.length === 2) {
       e.target.value = e.target.value + "/";
     } else if (e.target.value.length === 5 && e.key !== "Backspace") {
@@ -59,8 +56,8 @@ export default function Cardinfo() {
   }
 
   return (
-    <section className="flex flex-col gap-8">
-      <div className={`pl-4 border border-solid border-[var(--accent-color)] w-full md:w-full h-28 md:h-44 ${styles.checked}`}>
+    <section className="flex flex-col">
+      <div className={`pl-4 mb-4 outline-1 outline hover:outline-[3px] focus:outline-[3px] outline-[var(--accent-color)] w-full md:w-full h-28 md:h-44 ${styles.checked} ${isChecked === "mobile" && "outline-[3px]"}`}>
         <label htmlFor="mobile" className="h-full w-full flex items-center justify-center text-[var(--secondary-color)]">
           <div className="w-full h-fit flex items-center">
             <input
@@ -73,12 +70,12 @@ export default function Cardinfo() {
                 setIsChecked("mobile");
               }}
             />
-            <p className="text-[var(--secondary-color)] text-xl md:text-4xl ml-4 h-fit">MOBILEPAY</p>
+            <p className="text-[var(--secondary-color)] text-xl lg:text-4xl ml-4 h-fit">MOBILEPAY</p>
           </div>
-          <Image src={mobilepayLogo} alt="Mobilepay logo" className="w-20 md:w-28 mr-3" />
+          <Image src={mobilepayLogo} alt="Mobilepay logo" className="w-20 lg:w-28 mr-3" />
         </label>
       </div>
-      <div className={`pl-4 border border-solid border-[var(--accent-color)] w-full md:w-full h-28 md:h-44 ${styles.checked} ${isChecked === "card" && "h-fit md:h-fit"}`}>
+      <div className={`pl-4 mb-4 outline-1 outline hover:outline-[3px] focus:outline-[3px] outline-[var(--accent-color)] w-full md:w-full h-28 md:h-44 ${styles.checked} ${isChecked === "card" && "outline-[3px] h-fit md:h-fit"}`}>
         <label htmlFor="card" className="flex items-center justify-center text-[var(--secondary-color)] w-full h-28 md:h-44">
           <div className="w-full h-fit flex items-center">
             <input
@@ -86,16 +83,17 @@ export default function Cardinfo() {
               className={`${styles.radio} w-5 md:w-6 h-5 md:h-6`}
               name="payment"
               id="card"
+              checked={defaultCheck}
               required
               onChange={() => {
                 setIsChecked("card");
               }}
             />
-            <p className="text-[var(--secondary-color)] text-xl md:text-4xl ml-4 h-fit">CARD PAYMENT</p>
+            <p className="text-[var(--secondary-color)] text-xl lg:text-4xl ml-4 h-fit">CARD PAYMENT</p>
           </div>
           <div className="flex mr-7">
-            <Image src={visaLogo} alt="Visa logo" className="w-8 md:w-16 mr-1 md:mr-5" />
-            <Image src={mastercardLogo} alt="Mastercard logo" className="w-8 md:w-16" />
+            <Image src={visaLogo} alt="Visa logo" className="w-8 lg:w-16 mr-1 md:mr-5" />
+            <Image src={mastercardLogo} alt="Mastercard logo" className="w-8 lg:w-16" />
           </div>
         </label>
         {/* Hvis card payment er valgt skal nedestående dukke op */}
