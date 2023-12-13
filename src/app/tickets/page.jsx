@@ -94,6 +94,12 @@ export default function Home() {
   const [twoPers, setTwoPers] = useState(0);
   const [threePers, setThreePers] = useState(0);
 
+  //Dette state holder øje med hvilken af de to tent options, der er valgt. Bliver brugt i styling ved TentRadioBtnOne + Two, samt i YourPurchase
+  const [tentOption, setTentOption] = useState("");
+
+  //State der holder styr på om GREEN CAMPING  er valgt eller ikke
+  const [greenCamping, setGreenCamping] = useState(false);
+
   //beregnTelte sørger for at tildele korrekt antal telte til køberen, som herefter kan vises i YOUR PURCHASE
   function beregnTelte() {
     if (ticketAmount === 1 || ticketAmount === 2) {
@@ -120,16 +126,9 @@ export default function Home() {
       setThreePers(2);
     }
   }
-  // console.log("dette er twoPers", twoPers);
-  // console.log("dette er twoPers", threePers);
-
-  //Hvis man medbringer sit eget telt, er dette state true
-  const [tentOption, setTentOption] = useState("");
-
-  //State der holder styr på om GREEN CAMPING  er valgt eller ikke
-  const [greenCamping, setGreenCamping] = useState(false);
-  // console.log(greenCamping);
+  //Denne funktion bliver kaldt, når PrimaryBtn trykkes på i Choose Tent og tjekker om required er opnået, og derefter kører funktionen her:
   function validateTent() {
+    //Kopien af TicketArray bliver poppet, så det sidste item forsvinder. Dermed har vi det antal items, der passer til antal ekstra gæster
     copyTicketArray.pop();
 
     setVisible((o) => o + 1);
