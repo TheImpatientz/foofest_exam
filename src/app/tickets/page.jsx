@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 import PrimaryButton from "@/components/PrimaryButton";
 import YourPurchase from "@/components/YourPurchase";
 import Plusminus from "@/components/Plusminus";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import HeaderTwo from "@/components/HeaderTwo";
 import RadioBtn from "@/components/RadioBtn";
 import TentRadioBtnOne from "@/components/TentRadioBtnOne";
@@ -15,10 +15,7 @@ import Dob from "@/components/Dob";
 import EkstraTicket from "@/components/EkstraTicket";
 import Cardinfo from "@/components/Cardinfo";
 
-// import Link from "@/components/Link";
-
 export default function Home() {
-  const form = useRef(null);
   //metode til at få vist "flere sider" ligesom i matasquizzen
   const [visible, setVisible] = useState(1);
 
@@ -273,6 +270,7 @@ export default function Home() {
                 <p className="justify-self-end">1299,-</p>
               </div>
               <div role="alert" className={`alert rounded-none bg-[var(--primary-color)] border-none w-fit p-0 pt-4 ${hidden ? "hidden" : "flex"}`}>
+                {/* Denne alert er fra DaisyUI */}
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-[var(--accent-color)] shrink-0 w-6 h-6">
                   <path fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
