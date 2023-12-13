@@ -375,7 +375,7 @@ export default function Home() {
                   <Labelinput id="zipcode" inputname="zipcode" type="text" label="ZIPCODE" placeholder="EX. 2650"></Labelinput>
                   <Labelinput id="city" inputname="city" type="text" label="CITY" placeholder="EX. HVIDOVRE"></Labelinput>
                   <Labelinput id="email" inputname="email" type="email" label="EMAIL" placeholder="EX. THOMSON@HOTMAIL.COM"></Labelinput>
-                  <Labelinput id="telephone" inputname="telephone" type="text" label="TELEPHONE NR." placeholder="TELEPHONE NR.FIIIIIIX!!!"></Labelinput>
+                  <Labelinput id="telephone" inputname="telephone" type="text" label="TELEPHONE NR." placeholder="EX. 12233445"></Labelinput>
                 </div>
               </div>
               {/*Hér mapper vi igennem copyTicketArray og sørger for at returnere en EkstraTicket-komponent for hver item der er i vores copyTicketArray*/}
