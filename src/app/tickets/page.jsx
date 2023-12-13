@@ -20,7 +20,7 @@ import Cardinfo from "@/components/Cardinfo";
 export default function Home() {
   const form = useRef(null);
   //metode til at få vist "flere sider" ligesom i matasquizzen
-  const [visible, setVisible] = useState(3);
+  const [visible, setVisible] = useState(1);
 
   //states og objects til CHOOSE TICKETS------------------------------------------------------------
   //arrayet der holder styr på antal af hendholdvis regular- samt vip-tickets
