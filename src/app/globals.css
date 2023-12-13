@@ -57,6 +57,10 @@ a {
   font-family: "Ibarra Real Nova", serif;
 }
 
+#appearance {
+  appearance: auto;
+}
+
 /* Mobil */
 @media (max-width: 768px) {
   /* body {

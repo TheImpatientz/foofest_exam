@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 import PrimaryButton from "@/components/PrimaryButton";
 import YourPurchase from "@/components/YourPurchase";
 import Plusminus from "@/components/Plusminus";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import HeaderTwo from "@/components/HeaderTwo";
 import RadioBtn from "@/components/RadioBtn";
 import TentRadioBtnOne from "@/components/TentRadioBtnOne";
@@ -136,7 +136,7 @@ export default function Home() {
   function validateTent() {
     //Kopien af TicketArray bliver poppet, så det sidste item forsvinder. Dermed har vi det antal items, der passer til antal ekstra gæster
     copyTicketArray.pop();
-
+    scrollToTop();
     setVisible((o) => o + 1);
   }
 
@@ -146,6 +146,15 @@ export default function Home() {
   // Så har vi et array med et antal items, der passer til antallet af ekstra personer udover køberen.
   // Vi laver lige en kopi i stedet for at modificere det originale array
   let copyTicketArray = ticketArray;
+
+  //Da DaisyUI´s collapse ikke automatisk gør det muligt at tab sig ind i dens indhold, skal vi tvinge det frem
+  const [personalFocus, setPersonalFocus] = useState(true); //Dette state er til at holde styr på om collapsen skal være open (true) eller close (false)
+
+  function setFocus() {
+    if (personalFocus === false) {
+      setPersonalFocus(true);
+    }
+  }
 
   function addPersonalInfo(formData) {
     //Hér tilføjer vi items (vores states) til dataObj
@@ -215,8 +224,8 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* I denne section har vi ikke noget form-tag, da vi ikke bruger inputfelter på den første "side". Derimod samler vi data i et object, når der klikkes next */}
       {visible === 1 && (
+        // I denne section har vi ikke noget form-tag, da vi ikke bruger inputfelter på den første "side". Derimod samler vi data i et object, når der klikkes next
         <section className="md:relative">
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>CHOOSE TICKETS</h3>
@@ -340,11 +349,24 @@ export default function Home() {
         <section>
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>PERSONAL INFORMATION</h3>
-          <form action={addPersonalInfo}>
+          {/* collapse-close */}
+          {/* collapse-open */}
+          {/* ${personalFocus ? "collapse-open" : "collapse-close"} */}
+
+          <form action={addPersonalInfo} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <div tabIndex={0} className="collapse bg-[var(--primary-color)] collapse-arrow border border-[var(--accent-color)] rounded-none">
-                <input type="checkbox" />
-                <div className="collapse-title text-[var(--secondary-color)] text-xl md:text-4xl">YOUR INFORMATION</div>
+              <div tabIndex={0} onFocus={setFocus} className={`collapse ${personalFocus ? "collapse-open" : "collapse-close"} bg-[var(--primary-color)] collapse-arrow border border-[var(--accent-color)] rounded-none mb-4`}>
+                <input
+                  tabIndex={-1}
+                  type="checkbox"
+                  id="appearance"
+                  onClick={() => {
+                    setPersonalFocus((old) => !old);
+                  }}
+                />
+                <div tabIndex={-1} className="collapse-title text-[var(--secondary-color)] text-xl md:text-4xl">
+                  YOUR INFORMATION
+                </div>
                 <div className="collapse-content">
                   <Labelinput id="firstname" inputname="firstname" type="text" label="FIRSTNAME" placeholder="EX. PETER"></Labelinput>
                   <Labelinput id="lastname" inputname="lastname" type="text" label="LASTNAME" placeholder="EX. THOMSON"></Labelinput>
@@ -356,29 +378,16 @@ export default function Home() {
                   <Labelinput id="telephone" inputname="telephone" type="text" label="TELEPHONE NR." placeholder="TELEPHONE NR.FIIIIIIX!!!"></Labelinput>
                 </div>
               </div>
+              {/*Hér mapper vi igennem copyTicketArray og sørger for at returnere en EkstraTicket-komponent for hver item der er i vores copyTicketArray*/}
+              {copyTicketArray.map((item) => {
+                const uniqueId = Math.random();
+                return <EkstraTicket id={uniqueId} key={uniqueId}></EkstraTicket>;
+              })}
             </div>
-            {/*Hér mapper vi igennem copyTicketArray og sørger for at returnere en EkstraTicket-komponent for hver item der er i vores copyTicketArray*/}
-            {copyTicketArray.map((item) => {
-              const uniqueId = Math.random();
-              return <EkstraTicket id={uniqueId} key={uniqueId}></EkstraTicket>;
-            })}
-
-            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOptionn={tentOption} />
-            <PrimaryButton
-              text="NEXT"
-              onClick={() => {
-                //Vi tilføjer vores states som items til dataObj
-                dataObj.regular = ticket.regular;
-                dataObj.vip = ticket.vip;
-                dataObj.amount = ticketAmount;
-                dataObj.campingspot = chosenSpot;
-                dataObj.two_pers_tent = twoPers;
-                dataObj.three_pers_tent = threePers;
-                dataObj.greenCamping = greenCamping;
-                // console.log("dette er dataObjekt", dataObj);
-                setVisible((o) => o + 1);
-              }}
-            />
+            <div className="w-full md:w-full justify-self-end md:sticky md:top-6 md:h-fit">
+              <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} greenCamping={greenCamping} tentOptionn={tentOption} />
+              <PrimaryButton text="NEXT" />
+            </div>
           </form>
         </section>
       )}
