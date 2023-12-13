@@ -57,12 +57,14 @@ export default function Home() {
   const [spotsAvail, setSpotsAvail] = useState([]);
   // console.log("Dette er spots avail", spotsAvail);
 
+  //Her fetches available spots, når siden bliver renderet første gang (Og det sker kun ved første rendering)
   useEffect(() => {
     async function fetchFunction() {
       let response = await fetch(`http://localhost:8080/available-spots`, { method: "GET" });
       const data = await response.json();
       setSpotsAvail(data);
     }
+
     fetchFunction();
   }, []);
 
