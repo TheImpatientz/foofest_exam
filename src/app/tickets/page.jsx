@@ -234,6 +234,7 @@ export default function Home() {
                       setTicket((old) => ({ ...old, regular: old.regular + 1 }));
                       // KOMMENTAR ved klik tilføjes "ticket" til ticketArray.
                       setTicketArray((oldArray) => [...oldArray, "ticket"]);
+                      setHidden(true);
                     }
                   }}
                   //sender en prop ned til Plusminus. Funktionen vil trække et tal fra 'regular ticket'
@@ -257,6 +258,7 @@ export default function Home() {
                       setTicket((old) => ({ ...old, vip: old.vip + 1 }));
                       // KOMMENTAR ved klik tilføjes "ticket" til ticketArray
                       setTicketArray((oldArray) => [...oldArray, "ticket"]);
+                      setHidden(true);
                     }
                   }}
                   updateTicketSubstract={function updateTickets() {
