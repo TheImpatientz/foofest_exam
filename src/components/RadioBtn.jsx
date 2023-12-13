@@ -25,11 +25,7 @@ export default function RadioBtn({ name, id, chosenSpot, setChosenSpot, spotsAva
 
   return (
     <>
-      <div
-        className={`cursor-pointer mb-5 border hover:border-[3px] ${isDisabled && "hover:border"} border-solid border-[var(--accent-color)] w-full md:w-80 h-28 md:h-44 ${styles.checked} ${isDisabled && styles.disabled} ${
-          chosenSpot === id && "border-[3px]"
-        }`}
-      >
+      <div className={`cursor-pointer mb-5 border ${!isDisabled && "hover:border-[3px]"} border-solid border-[var(--accent-color)] w-full h-28 md:h-44 ${styles.checked} ${isDisabled && styles.disabled} ${chosenSpot === id && "border-[3px]"}`}>
         <label htmlFor={id} className="cursor-pointer h-full w-full flex flex-col items-center justify-center text-[var(--secondary-color)]">
           <div className="w-fit h-fit flex items-center">
             <input
@@ -45,7 +41,7 @@ export default function RadioBtn({ name, id, chosenSpot, setChosenSpot, spotsAva
               }}
               value={id}
             />
-            <p className="text-[var(--secondary-color)] text-xl md:text-4xl ml-4 h-fit">{text + idObjectAvail}</p>
+            <p className="text-[var(--secondary-color)] text-xl md:text-4xl ml-4 h-fit">{text}</p>
           </div>
           {isDisabled ? "Sold out" : ""}
         </label>

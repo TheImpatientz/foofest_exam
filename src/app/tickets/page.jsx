@@ -231,7 +231,7 @@ export default function Home() {
                       setTicket((old) => ({ ...old, regular: old.regular + 1 }));
                       // KOMMENTAR ved klik tilføjes "ticket" til ticketArray.
                       setTicketArray((oldArray) => [...oldArray, "ticket"]);
-                      setHidden(true);
+                      setHidden(true); //Fjerner alert message
                     }
                   }}
                   //sender en prop ned til Plusminus. Funktionen vil trække et tal fra 'regular ticket'
@@ -240,6 +240,7 @@ export default function Home() {
                       setTicket((old) => ({ ...old, regular: old.regular - 1 }));
                       // KOMMENTAR slice(0, -1) sørger for at fjerne det sidste item i arrayet
                       setTicketArray((oldArray) => oldArray.slice(0, -1));
+                      setHidden(true);
                     }
                   }}
                   setTicket={setTicket}
@@ -263,6 +264,7 @@ export default function Home() {
                       setTicket((old) => ({ ...old, vip: old.vip - 1 }));
                       // KOMMENTAR slice(0, -1) sørger for at fjerne det sidste item i arrayet
                       setTicketArray((oldArray) => oldArray.slice(0, -1));
+                      setHidden(true);
                     }
                   }}
                   setTicket={setTicket}
@@ -274,7 +276,8 @@ export default function Home() {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-[var(--accent-color)] shrink-0 w-6 h-6">
                   <path fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <p className="text-[var(--secondary-color)]">Please choose the ticket amount</p>
+                {ticketAmount === 0 && <p className="text-[var(--secondary-color)]">Please choose the ticket amount</p>}
+                {ticketAmount > 10 && <p className="text-[var(--secondary-color)]">You can buy a maximum of 10 tickets</p>}
               </div>
             </div>
             <div className="w-full md:w-full justify-self-end md:sticky md:top-6 md:h-fit">
@@ -283,7 +286,7 @@ export default function Home() {
               <PrimaryButton
                 text="NEXT"
                 onClick={() => {
-                  if (ticketAmount > 0) {
+                  if (ticketAmount > 0 && ticketAmount < 11) {
                     setVisible((o) => o + 1);
                     scrollToTop();
                   } else {
@@ -300,25 +303,18 @@ export default function Home() {
         <section>
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>CHOOSE CAMPINGSPOT</h3>
-          <form action={validateCampspot}>
-            <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Svartheim" text="SVARTHEIM" ticketAmount={ticketAmount}></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Nilfheim" text="NILFHEIM" ticketAmount={ticketAmount}></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Helheim" text="HELHEIM" ticketAmount={ticketAmount}></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Muspelheim" text="MUSPELHEIM" ticketAmount={ticketAmount}></RadioBtn>
-            <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Alfheim" text="ALFHEIM" ticketAmount={ticketAmount}></RadioBtn>
-            <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} />
-            <PrimaryButton
-              text="NEXT"
-              // onClick={() => {
-              //   // Jeg tilføjer chosenSpot og ticketAmount til vores putDataObj da dette sendes i PUT-requesten
-              //   putDataObj.area = chosenSpot;
-              //   putDataObj.amount = ticketAmount;
-              //   console.log("dette er PUTobjektet", putDataObj);
-              //   sendPutRequest();
-
-              //   setVisible((o) => o + 1);
-              // }}
-            />
+          <form action={validateCampspot} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
+            <div className="sm:grid sm:grid-cols-2 sm:gap-8 md:grid-cols-1 xl:grid-cols-2">
+              <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Svartheim" text="SVARTHEIM" ticketAmount={ticketAmount}></RadioBtn>
+              <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Nilfheim" text="NILFHEIM" ticketAmount={ticketAmount}></RadioBtn>
+              <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Helheim" text="HELHEIM" ticketAmount={ticketAmount}></RadioBtn>
+              <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Muspelheim" text="MUSPELHEIM" ticketAmount={ticketAmount}></RadioBtn>
+              <RadioBtn spotsAvail={spotsAvail} chosenSpot={chosenSpot} setChosenSpot={setChosenSpot} name="campspots" id="Alfheim" text="ALFHEIM" ticketAmount={ticketAmount}></RadioBtn>
+            </div>
+            <div className="w-full md:w-full justify-self-end md:sticky md:top-6 md:h-fit">
+              <YourPurchase ticket={ticket} campingspot={chosenSpot.toUpperCase()} twoPers={twoPers} threePers={threePers} />
+              <PrimaryButton text="NEXT" />
+            </div>
           </form>
         </section>
       )}
