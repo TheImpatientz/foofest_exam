@@ -199,10 +199,24 @@ export default function Home() {
 
     console.log("dette er objektet", dataObj);
 
+    // KOMMENTAR //Kalder functionen der tjekker value for EKSTRA TICKETS
+    // submitEkstraValues(e);
+
     postOrder(dataObj);
 
     setVisible((o) => o + 1);
   }
+
+  // KOMMENTAR //Forsøger at opsamle input fra EKSTRA-TICKETS
+  // function submitEkstraValues(e) {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.target);
+  //   console.log(formData.get("firstname_ekstra"));
+  //   console.log(e.target.elements.firstname_ekstra);
+  //   e.target.elements.firstname_ekstra.forEach((field, index) => {
+  //     console.log(field.value, e.target.elements.firstname_ekstra[index].value);
+  //   });
+  // }
 
   async function postOrder(data) {
     let headersList = {
@@ -381,7 +395,7 @@ export default function Home() {
               {/*Hér mapper vi igennem copyTicketArray og sørger for at returnere en EkstraTicket-komponent for hver item der er i vores copyTicketArray*/}
               {copyTicketArray.map((item) => {
                 const uniqueId = Math.random();
-                return <EkstraTicket id={uniqueId} key={uniqueId}></EkstraTicket>;
+                return <EkstraTicket name="firstname_ekstra" id={uniqueId} key={uniqueId}></EkstraTicket>;
               })}
             </div>
             <div className="w-full md:w-full justify-self-end md:sticky md:top-6 md:h-fit">

@@ -5,7 +5,7 @@ import Labelinput from "./Labelinput";
 //Her benyttes der af DaisyUI's collapse component (https://daisyui.com/components/collapse/)
 //Tilføjet d. 5/12/23
 
-export default function EkstraTicket({ id }) {
+export default function EkstraTicket({ id, name }) {
   //Da DaisyUI´s collapse ikke automatisk gør det muligt at tab sig ind i dens indhold, skal vi tvinge det frem
   const [ekstraFocus, setEkstraFocus] = useState(false); //Dette state er til at holde styr på om collapsen skal være open (true) eller close (false)
 
@@ -29,7 +29,7 @@ export default function EkstraTicket({ id }) {
         EXTRA TICKET
       </div>
       <div className="collapse-content">
-        <Labelinput forId={id} id={id} label="FIRSTNAME" type="text" placeholder="EX. PETER" />
+        <Labelinput name={name} forId={id} id={id} label="FIRSTNAME" type="text" placeholder="EX. PETER" />
         <Labelinput forId={id + 1} id={id + 1} label="LASTNAME" type="text" placeholder="EX. THOMSEN" />
         <Dob />
       </div>
