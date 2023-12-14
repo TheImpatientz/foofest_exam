@@ -16,6 +16,9 @@
   -webkit-animation: spin 5s linear infinite;
   animation: spin 5s linear infinite;
 }
+.hide {
+  display: none;
+}
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);

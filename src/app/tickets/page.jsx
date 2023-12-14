@@ -14,11 +14,12 @@ import Labelinput from "@/components/Labelinput";
 import Dob from "@/components/Dob";
 import EkstraTicket from "@/components/EkstraTicket";
 import Cardinfo from "@/components/Cardinfo";
+import Spinner from "@/components/Spinner";
 
 export default function Home() {
   //metode til at få vist "flere sider" ligesom i matasquizzen
   const [visible, setVisible] = useState(1);
-
+  const [spinnerDisplay, setSpinnerDisplay] = useState(true);
   //Denne function tager brugeren til toppen af siden. Funktionen bliver kaldt når der "skiftes side" på siden.
   function scrollToTop() {
     //Her har vi benyttet ChatGPT til at få hjælp til at finde en smart måde at scrolle på til toppen af vinduet.
@@ -67,6 +68,7 @@ export default function Home() {
       let response = await fetch(`http://localhost:8080/available-spots`, { method: "GET" });
       const data = await response.json();
       setSpotsAvail(data);
+      setSpinnerDisplay(false);
     }
 
     fetchFunction();
@@ -231,8 +233,10 @@ export default function Home() {
   return (
     <Layout current="Tickets">
       {visible === 1 && (
+        // className={`${spinnerDisplay ? "block" : "hidden"}`}
         // I denne section har vi ikke noget form-tag, da vi ikke bruger inputfelter på den første "side". Derimod samler vi data i et object, når der klikkes next
         <section className="md:relative">
+          <Spinner spinnerDisplay={spinnerDisplay} />
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>CHOOSE TICKETS</h3>
           <div className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">

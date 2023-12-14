@@ -1,9 +1,12 @@
+import Image from "next/image";
 import styles from "@/components/Spinner.module.css";
-export default function Spinner() {
+import Biglogo from "@/logo/logo_big.svg";
+export default function Spinner({ spinnerDisplay }) {
   return (
-    <div className={`${styles.popupOverlay}`}>
+    <div className={`${styles.popupOverlay} ${!spinnerDisplay && styles.hide}`}>
       <div className="grid w-full h-full">
-        <svg className={`${styles.spinner}`} width="150" height="150" viewBox="0 0 113 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <Image src={Biglogo} alt="FooFest logo" className={`${styles.spinner}`} />
+        {/* <svg className={`${styles.spinner}`} width="150" height="150" viewBox="0 0 113 112" fill="none" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="57.122" cy="55.8508" rx="22.0136" ry="22.0222" fill="#C5EF1A" />
           <line x1="56.6509" y1="0.0710449" x2="56.6509" y2="36.7575" stroke="#C5EF1A" stroke-width="3" />
           <line y1="-1.5" x2="36.6861" y2="-1.5" transform="matrix(-0.161051 0.986946 -0.986926 -0.161173 65.6763 0.550293)" stroke="#C5EF1A" stroke-width="3" />
@@ -37,7 +40,7 @@ export default function Spinner() {
           <line y1="-1.5" x2="38.1693" y2="-1.5" transform="matrix(0.570272 0.821456 -0.821249 0.57057 24.2249 10.4907)" stroke="#C5EF1A" stroke-width="3" />
           <line y1="-1.5" x2="38.1719" y2="-1.5" transform="matrix(0.387111 0.922033 -0.921926 0.387366 33.6831 4.55371)" stroke="#C5EF1A" stroke-width="3" />
           <line y1="-1.5" x2="38.1737" y2="-1.5" transform="matrix(0.16047 0.987041 -0.987021 0.160591 45.0486 1.80591)" stroke="#C5EF1A" stroke-width="3" />
-        </svg>
+        </svg> */}
       </div>
     </div>
   );
