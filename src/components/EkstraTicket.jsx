@@ -29,7 +29,7 @@ export default function EkstraTicket({ id }) {
         EXTRA TICKET
       </div>
       <div className="collapse-content">
-        <Labelinput forId={id} id={id} label="FIRSTNAME" type="text" placeholder="EX. PETER" />
+        <Labelinput inputname="firstname_ekstra" forId={id} id={id} label="FIRSTNAME" type="text" placeholder="EX. PETER" />
         <Labelinput forId={id + 1} id={id + 1} label="LASTNAME" type="text" placeholder="EX. THOMSEN" />
         <Dob />
       </div>

@@ -156,7 +156,7 @@ export default function Home() {
     }
   }
 
-  function addPersonalInfo(formData) {
+  function addPersonalInfo(evt) {
     //Hér tilføjer vi items (vores states) til dataObj
     dataObj.regular = ticket.regular;
     dataObj.vip = ticket.vip;
@@ -167,6 +167,10 @@ export default function Home() {
     dataObj.greenCamping = greenCamping;
     // console.log("dette er dataObjekt", dataObj);
     //Her sørger vi for (ved hver const) at fange/get (PERSONAL INFORMATION) inputfeltets data. Efterfølgende putter vi det ind i vores dataObj (objekt)
+
+    //denne er nødvendig fordi vi bruger onSubit og ikke action (men det er ikke noget, hvis er sat dybt ind i, da det er Jonas, der har hjulpet med denne del: submitEkstraValues(evt))
+    const formData = new FormData(evt.target);
+
     const firstname = formData.get("firstname");
     dataObj.firstname = firstname;
 
@@ -197,11 +201,30 @@ export default function Home() {
     const telephone = formData.get("telephone");
     dataObj.telephone = telephone;
 
+    // KOMMENTAR //Kalder submitEkstraValues(evt)
+    submitEkstraValues(evt);
+
     console.log("dette er objektet", dataObj);
 
     postOrder(dataObj);
     scrollToTop();
     setVisible((o) => o + 1);
+  }
+
+  // // KOMMENTAR //Forsøger at opsamle input fra EKSTRA-TICKETS
+  function submitEkstraValues(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    let firstName_ekstra = e.target.elements.firstname_ekstra;
+    if (!firstName_ekstra.length) {
+      firstName_ekstra = [e.target.elements.firstname_ekstra];
+    }
+    firstName_ekstra.forEach((field, index) => {
+      console.log(field.value, firstName_ekstra[index].value);
+    });
+
+    console.log(formData.get("firstname_ekstra"));
+    console.log(firstName_ekstra.length);
   }
 
   async function postOrder(data) {
@@ -359,7 +382,7 @@ export default function Home() {
           {/* collapse-open */}
           {/* ${personalFocus ? "collapse-open" : "collapse-close"} */}
 
-          <form action={addPersonalInfo} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
+          <form onSubmit={addPersonalInfo} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
             <div>
               <div tabIndex={0} onFocus={setFocus} className={`collapse ${personalFocus ? "collapse-open" : "collapse-close"} bg-[var(--primary-color)] collapse-arrow border border-[var(--accent-color)] rounded-none mb-4`}>
                 <input
@@ -410,7 +433,12 @@ export default function Home() {
           </form>
         </section>
       )}
-      {visible === 6 && <p>her skal tak for din bestilling siden være</p>}
+      {visible === 6 && (
+        <section>
+          <p className="text-3xl">THANK YOU! YOUR ORDER HAS BEEN RECEIVED</p>
+          <p>YOULL RECEIVE AN EMAIL WITH THE ORDER INFORMATION</p>
+        </section>
+      )}
     </Layout>
   );
 }
