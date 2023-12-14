@@ -334,8 +334,9 @@ export default function Home() {
         </section>
       )}
       {visible === 3 && (
-        <section className="md:relative">
+        <section className="md:relative grid">
           <HeaderTwo page="Checkout"></HeaderTwo>
+          <p className="justify-self-end">05.00 min</p>
           <h3>CHOOSE A TENT OPTION</h3>
           <form action={validateTent} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
             <div>
@@ -352,8 +353,9 @@ export default function Home() {
         </section>
       )}
       {visible === 4 && (
-        <section>
+        <section className="grid">
           <HeaderTwo page="Checkout"></HeaderTwo>
+          <p className="justify-self-end">05.00 min</p>
           <h3>PERSONAL INFORMATION</h3>
           {/* collapse-close */}
           {/* collapse-open */}
@@ -398,8 +400,9 @@ export default function Home() {
         </section>
       )}
       {visible === 5 && (
-        <section>
+        <section className="grid">
           <HeaderTwo page="Checkout"></HeaderTwo>
+          <p className="justify-self-end">05.00 min</p>
           <h3>CHOOSE PAYMENT</h3>
           <form action={validatePayment} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
             <Cardinfo></Cardinfo>
