@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <>
       <div className={`${styles.landing_image} h-96 md:h-min flex flex-col gap-8`}>
-        <Header />
+        <Header current="Home" />
         <h1 className="flex items-center justify-center my-9">
           F
           <span className="h-fit">

@@ -15,7 +15,7 @@ export default async function program() {
   const data = await response.json();
   console.log(data);
   return (
-    <Layout>
+    <Layout current="Program">
       <HeaderTwo page="Program" />
       <SecondaryButton />
       {/* SENDER DATA MED NED TIL SCHEDULE */}

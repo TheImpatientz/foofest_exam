@@ -11,7 +11,7 @@ export default function Countdown() {
 
   useEffect(() => {
     //Denne useEffect() køres én gang når siden loader
-    console.log("checking countdown first time");
+    //console.log("checking countdown first time");
     // countDownDate sætter vi til at være hvornår festivallen skal foregå
     //Når man benytter getTime() finder man det antal millisekunder der er gået siden January 1, 1970 00:00:00
     const countDownDate = new Date("February 5, 2024 12:00:00").getTime();
@@ -33,7 +33,7 @@ export default function Countdown() {
   useEffect(() => {
     //Denne useEffect() kører i et interval hvert sekund (til at opdatere states)
     const interval = setInterval(() => {
-      console.log("checking countdown again");
+      //console.log("checking countdown again");
       const countDownDate = new Date("February 5, 2024 12:00:00").getTime();
 
       const now = new Date().getTime();

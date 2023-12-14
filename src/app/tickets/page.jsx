@@ -229,7 +229,7 @@ export default function Home() {
   }
 
   return (
-    <Layout>
+    <Layout current="Tickets">
       {visible === 1 && (
         // I denne section har vi ikke noget form-tag, da vi ikke bruger inputfelter på den første "side". Derimod samler vi data i et object, når der klikkes next
         <section className="md:relative">

@@ -6,7 +6,7 @@
   overflow: hidden;
   width: fit-content;
   /*padding top og buttom til at få nedhængende bogstaver (g) til ikke at blive cuttet af */
-  padding: 0.2em 0;
+  margin: 0.2em 0;
 }
 
 .a::after {
@@ -24,15 +24,24 @@
   transition: opacity 600ms, transform 600ms;
 }
 
-.a:hover::after,
-.a:focus::after {
+.a:hover::after {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
-.a:visited::after,
-.a:active::after {
-  text-decoration: underline;
-  color: var(--primary-color);
+
+.current_page:hover::after,
+.current_page:focus::after {
+  height: 1px;
+  display: none;
+  transform: none;
+}
+/* .current_page::after {
+  height: 0px;
+  background-color: transparent;
+} */
+
+.current_page {
+  border-bottom: 2px solid var(--primary-color);
 }
 .burger_a {
   color: var(--primary-color);
