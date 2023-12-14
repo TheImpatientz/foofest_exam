@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 import PrimaryButton from "@/components/PrimaryButton";
 import YourPurchase from "@/components/YourPurchase";
 import Plusminus from "@/components/Plusminus";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import HeaderTwo from "@/components/HeaderTwo";
 import RadioBtn from "@/components/RadioBtn";
 import TentRadioBtnOne from "@/components/TentRadioBtnOne";
@@ -204,7 +204,9 @@ export default function Home() {
     dataObj.telephone = telephone;
 
     // KOMMENTAR //Kalder submitEkstraValues(evt)
-    submitEkstraValues(evt);
+    if (ticketAmount > 1) {
+      submitEkstraValues(evt);
+    }
 
     console.log("dette er objektet", dataObj);
 
@@ -250,8 +252,21 @@ export default function Home() {
   //validering til CHOOSE PAYMENT -------------------------------------------------------
   function validatePayment() {
     scrollToTop();
+    setSpinnerDisplay(true);
     setVisible((o) => o + 1);
   }
+  //funktion til ORDER CONFIRMATION -------------------------------------------------------
+
+  useEffect(() => {
+    if (visible === 6) {
+      const interval = setInterval(() => {
+        setSpinnerDisplay(false);
+        return () => {
+          clearInterval(interval);
+        };
+      }, 1000);
+    }
+  }, [visible]);
 
   return (
     <Layout current="Tickets">
@@ -442,6 +457,7 @@ export default function Home() {
       )}
       {visible === 6 && (
         <section>
+          <Spinner spinnerDisplay={spinnerDisplay} />
           <p className="text-3xl">THANK YOU! YOUR ORDER HAS BEEN RECEIVED</p>
           <p>YOULL RECEIVE AN EMAIL WITH THE ORDER INFORMATION</p>
         </section>
