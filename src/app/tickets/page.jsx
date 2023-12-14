@@ -456,11 +456,13 @@ export default function Home() {
         </section>
       )}
       {visible === 6 && (
-        <section>
+        <>
           <Spinner spinnerDisplay={spinnerDisplay} />
-          <p className="text-3xl">THANK YOU! YOUR ORDER HAS BEEN RECEIVED</p>
-          <p>YOULL RECEIVE AN EMAIL WITH THE ORDER INFORMATION</p>
-        </section>
+          <section className={`${spinnerDisplay && "hidden"}`}>
+            <p className="text-3xl">THANK YOU! YOUR ORDER HAS BEEN RECEIVED</p>
+            <p>YOULL RECEIVE AN EMAIL WITH THE ORDER INFORMATION</p>
+          </section>
+        </>
       )}
     </Layout>
   );
