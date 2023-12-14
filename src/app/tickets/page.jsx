@@ -236,7 +236,7 @@ export default function Home() {
           <HeaderTwo page="Checkout"></HeaderTwo>
           <h3>CHOOSE TICKETS</h3>
           <div className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
-            <div className="outline outline-[var(--accent-color)] outline-1 p-5 md:p-6 mb-12 w-full h-fit">
+            <div className="outline outline-[var(--accent-color)] outline-1 p-5 md:p-9 mb-12 w-full h-fit">
               <div className="grid grid-cols-4 place-items-center mb-8 md:mb-10">
                 <p className="justify-self-start col-start-1 col-span-2">REGULAR TICKET</p>
                 <Plusminus

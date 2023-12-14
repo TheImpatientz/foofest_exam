@@ -25,7 +25,7 @@ export default function RadioBtn({ name, id, chosenSpot, setChosenSpot, spotsAva
 
   return (
     <>
-      <div className={`cursor-pointer mb-5 border ${!isDisabled && "hover:border-[3px]"} border-solid border-[var(--accent-color)] w-full h-28 md:h-44 ${styles.checked} ${isDisabled && styles.disabled} ${chosenSpot === id && "border-[3px]"}`}>
+      <div className={`cursor-pointer border ${!isDisabled && "hover:border-[3px]"} border-solid border-[var(--accent-color)] w-full h-28 md:h-44 ${styles.checked} ${isDisabled && styles.disabled} ${chosenSpot === id && "border-[3px]"}`}>
         <label htmlFor={id} className="cursor-pointer h-full w-full flex flex-col items-center justify-center text-[var(--secondary-color)]">
           <div className="w-fit h-fit flex items-center">
             <input
