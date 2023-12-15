@@ -48,12 +48,15 @@ export default function Home() {
   //states og objects til CHOOSE CAMPINGSPOTS------------------------------------------------------
   const [chosenSpot, setChosenSpot] = useState("");
 
+  //denne state ender med at indeholde vores is (fra PUT-request), som vi til sidst sender i en POST-request
+  const [fullfillReservation, setFullfillReservation] = useState("");
+
   //Her tjekker den om required er opfyldt i CHOOSE CAMPINGSPOTS, når submit knappen trykkes på i dens form
   function validateCampspot() {
     // Tilføjer chosenSpot og ticketAmount til vores putDataObj, da dette sendes i PUT-requesten
     putDataObj.area = chosenSpot;
     putDataObj.amount = ticketAmount;
-    // console.log("dette er PUTobjektet", putDataObj);
+    console.log("dette er PUTobjektet", putDataObj);
     sendPutRequest();
     scrollToTop();
     setVisible((o) => o + 1);
@@ -79,6 +82,7 @@ export default function Home() {
   //console.log("amout er", ticketAmount);
 
   // Denne funktion bliver kaldt når der klikkes submit på chooseCampingspot-siden. Funktionen sender et PUT-request, som returnerer et id, hvis der er plads på spot'et
+
   async function sendPutRequest() {
     let headersList = {
       "Content-Type": "application/json",
@@ -94,7 +98,14 @@ export default function Home() {
     // Har ændret koden fra at være ".text()" til ".json()", så objektet der udskrives er json
     let data = await response.json();
     //data indeholder vores Id, som skal postes
-    // console.log(data);
+    console.log("dette er response fra PUT", data);
+
+    //Spurgt ChatGPT om hjælp til syntaksen d. 15/12-2023
+    // Udvinder id fra objektet
+    const { id } = data;
+
+    //Her sætter vi setReservation-staten til id'et, så vi senere kan bruge "reservation", når vi bruger postId
+    setFullfillReservation(id);
   }
 
   //states og objects til CHOOSE TENT OPTION-------------------------------------------------------
@@ -170,7 +181,7 @@ export default function Home() {
     // console.log("dette er dataObjekt", dataObj);
     //Her sørger vi for (ved hver const) at fange/get (PERSONAL INFORMATION) inputfeltets data. Efterfølgende putter vi det ind i vores dataObj (objekt)
 
-    //denne er nødvendig fordi vi bruger onSubit og ikke action (men det er ikke noget, hvis er sat dybt ind i, da det er Jonas, der har hjulpet med denne del: submitEkstraValues(evt))
+    //denne er nødvendig fordi vi bruger onSubmit og ikke action
     const formData = new FormData(evt.target);
 
     const firstname = formData.get("firstname");
@@ -208,14 +219,16 @@ export default function Home() {
       submitEkstraValues(evt);
     }
 
-    console.log("dette er objektet", dataObj);
+    // console.log("dette er objektet", dataObj);
 
+    //Hér bliver vores post-funktion kaldt, som poster vores objekt: dataObj
     postOrder(dataObj);
     scrollToTop();
     setVisible((o) => o + 1);
   }
 
-  // // KOMMENTAR //Forsøger at opsamle input fra EKSTRA-TICKETS, putter hver ekstra person i et objekt hver, derefter pusher jeg opjekterne ind i et array ekstraPersons.
+  // submitEkstraValues(e) er lavet med hjælp fra Jonas d. 12/12-2023
+  //Forsøger at opsamle input fra EKSTRA-TICKETS, putter hver ekstra person i et objekt hver, derefter pusher jeg opjekterne ind i et array ekstraPersons.
   function submitEkstraValues(e) {
     e.preventDefault();
 
@@ -249,54 +262,7 @@ export default function Home() {
     console.log("dette er dataObj", dataObj);
   }
 
-  // KOPI// // KOMMENTAR //Forsøger at opsamle input fra EKSTRA-TICKETS
-  // function submitEkstraValues(e) {
-  //   e.preventDefault();
-
-  //   let firstNameArr = [];
-  //   let firstName_ekstra = e.target.elements.firstname_ekstra;
-
-  //   if (!firstName_ekstra.length) {
-  //     firstName_ekstra = [e.target.elements.firstname_ekstra];
-  //   }
-  //   firstName_ekstra.forEach((field) => {
-  //     firstNameArr.push(field.value);
-  //     console.log(firstNameArr);
-  //     dataObj.firstnameEkstra = firstNameArr;
-  //   });
-
-  //   let lastNameArr = [];
-  //   let lastName_ekstra = e.target.elements.lastname_ekstra;
-
-  //   if (!lastName_ekstra.length) {
-  //     lastName_ekstra = [e.target.elements.lastname_ekstra];
-  //   }
-  //   lastName_ekstra.forEach((field) => {
-  //     lastNameArr.push(field.value);
-  //     console.log(lastNameArr);
-  //     dataObj.lastnameEkstra = lastNameArr;
-  //   });
-
-  //   let dayArr = [];
-  //   let day_ekstra = e.target.elements.day_ekstra;
-
-  //   if (!day_ekstra.length) {
-  //     day_ekstra = [e.target.elements.day_ekstra];
-  //   }
-  //   day_ekstra.forEach((field) => {
-  //     dayArr.push(field.value);
-  //     console.log(dayArr);
-  //     dataObj.dayEkstra = dayArr;
-  //   });
-
-  //   console.log("dette er det lækre obj", dataObj);
-
-  //   // console.log("til freja", formData.get("firstname_ekstra"));
-  //   // console.log("formData get", formData.get("firstname_ekstra"));
-  //   // console.log("dette er firstName_ekstra", firstName_ekstra);
-  //   // console.log(firstName_ekstra.length);
-  // }
-
+  //Dette er funktionen der poster vores objekt til vores database
   async function postOrder(data) {
     let headersList = {
       apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmZGZ3YXVmeXR3ZHVyb3BuZHl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTY4NDY3NzMsImV4cCI6MjAxMjQyMjc3M30.cX_qLqrbHMXj2dbzqfm88QbNPlMAXYOy8OQkNapHWG8",
@@ -320,6 +286,29 @@ export default function Home() {
     scrollToTop();
     setSpinnerDisplay(true);
     setVisible((o) => o + 1);
+
+    // Send POST-request med id
+    postId();
+  }
+
+  // Denne funktion bliver kaldt, når den sidste knap "checkout" er klikket og formen er valideret.Funktionen sender et POST-request, som poster Id'et i backend-databsen, hvis man har nået at reservere inden for 5 minutter
+  async function postId() {
+    let headersList = {
+      "Content-Type": "application/json",
+    };
+
+    let bodyContent = JSON.stringify({
+      id: fullfillReservation,
+    });
+
+    let response = await fetch("http://localhost:8080/fullfill-reservation", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList,
+    });
+
+    let dataResponse = await response.json();
+    console.log(dataResponse);
   }
   //funktion til ORDER CONFIRMATION -------------------------------------------------------
 
