@@ -15,6 +15,7 @@ import Dob from "@/components/Dob";
 import EkstraTicket from "@/components/EkstraTicket";
 import Cardinfo from "@/components/Cardinfo";
 import Spinner from "@/components/Spinner";
+import FiveTimer from "@/components/FiveTimer";
 
 export default function Home() {
   //metode til at få vist "flere sider" ligesom i matasquizzen
@@ -444,7 +445,7 @@ export default function Home() {
       {visible === 3 && (
         <section className="md:relative grid">
           <HeaderTwo page="Checkout"></HeaderTwo>
-          <p className="justify-self-end">05.00 min</p>
+          <FiveTimer />
           <h3>CHOOSE A TENT OPTION</h3>
           <form action={validateTent} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
             <div>
@@ -463,7 +464,7 @@ export default function Home() {
       {visible === 4 && (
         <section className="grid">
           <HeaderTwo page="Checkout"></HeaderTwo>
-          <p className="justify-self-end">05.00 min</p>
+          <FiveTimer />
           <h3>PERSONAL INFORMATION</h3>
           {/* collapse-close */}
           {/* collapse-open */}
@@ -510,7 +511,7 @@ export default function Home() {
       {visible === 5 && (
         <section className="grid">
           <HeaderTwo page="Checkout"></HeaderTwo>
-          <p className="justify-self-end">05.00 min</p>
+          <FiveTimer />
           <h3>CHOOSE PAYMENT</h3>
           <form action={validatePayment} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
             <Cardinfo></Cardinfo>

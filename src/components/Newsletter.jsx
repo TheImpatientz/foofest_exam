@@ -2,10 +2,11 @@ import Image from "next/image";
 import logoNewsletter from "@/img/logo_newsletter.svg";
 
 export default function Newsletter() {
+  // width={50} height={50}
   return (
     <div className="grid ml-auto mr-auto place-items-center md:grid-rows-2 md:w-[395px]">
       <div className="flex md:place-self-start">
-        <Image src={logoNewsletter} alt="" width={50} height={50} className="md:w-16"></Image>
+        <Image src={logoNewsletter} alt="FooFest logo" className="w-12 h-auto md:w-16"></Image>
         <p className="newsletter_p italic text-2xl ml-3 min-w-[239px] md:text-3xl md:w-[270px] ">
           Get the latest <br /> updates from FooFest
         </p>
