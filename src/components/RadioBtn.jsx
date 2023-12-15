@@ -6,14 +6,11 @@ import styles from "@/components/RadioBtn.module.css";
 //Et name (dette skal være ens for de buttons der er i samme gruppe)
 //Et id, der skal være unikt og som også bliver den tekst der vises i label
 export default function RadioBtn({ name, id, chosenSpot, setChosenSpot, spotsAvail, text, ticketAmount }) {
-  const [isChecked, setIsChecked] = useState(false);
-
   // Find det objekt der passer med Id
   const idObject = spotsAvail.find((item) => item.area === id);
 
   // Den tager det valgte objekt og læser dens available-værdi
-  const idObjectAvail = idObject && idObject.available;
-  //console.log(idObjectAvail);
+  const idObjectAvail = idObject.available;
 
   //Hvis idObjectAvail er lig med 0, så sættes isDisabled = true ved input + css class'en "styles.disabled" vil blive tilføjet + et ekstra tekst vil dukke op
   let isDisabled = idObjectAvail === 0 ? true : false;
@@ -21,7 +18,6 @@ export default function RadioBtn({ name, id, chosenSpot, setChosenSpot, spotsAva
   if (idObjectAvail < ticketAmount) {
     isDisabled = true;
   }
-  //console.log(id, isChecked);
 
   return (
     <>
@@ -36,7 +32,6 @@ export default function RadioBtn({ name, id, chosenSpot, setChosenSpot, spotsAva
               disabled={isDisabled}
               required
               onChange={() => {
-                setIsChecked((old) => !old);
                 setChosenSpot(id);
               }}
               value={id}
