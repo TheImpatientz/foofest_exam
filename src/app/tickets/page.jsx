@@ -69,7 +69,7 @@ export default function Home() {
   //Her fetches available spots, når siden bliver renderet første gang (Og det sker kun ved første rendering)
   useEffect(() => {
     async function fetchFunction() {
-      let response = await fetch(`http://localhost:8080/available-spots`, { method: "GET" });
+      let response = await fetch(`https://plant-flaxen-glove.glitch.me/available-spots`, { method: "GET" });
       const data = await response.json();
       setSpotsAvail(data);
       setSpinnerDisplay(false);
@@ -91,7 +91,7 @@ export default function Home() {
 
     let bodyContent = JSON.stringify(putDataObj);
 
-    let response = await fetch("http://localhost:8080/reserve-spot", {
+    let response = await fetch("https://plant-flaxen-glove.glitch.me/reserve-spot", {
       method: "PUT",
       body: bodyContent,
       headers: headersList,
@@ -302,7 +302,7 @@ export default function Home() {
       id: fullfillReservation,
     });
 
-    let response = await fetch("http://localhost:8080/fullfill-reservation", {
+    let response = await fetch("https://plant-flaxen-glove.glitch.me/fullfill-reservation", {
       method: "POST",
       body: bodyContent,
       headers: headersList,
