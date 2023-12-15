@@ -19,7 +19,7 @@ import FiveTimer from "@/components/FiveTimer";
 
 export default function Home() {
   //metode til at få vist "flere sider" ligesom i matasquizzen
-  const [visible, setVisible] = useState(6);
+  const [visible, setVisible] = useState(1);
   const [spinnerDisplay, setSpinnerDisplay] = useState(true);
   //Denne function tager brugeren til toppen af siden. Funktionen bliver kaldt når der "skiftes side" på siden.
   function scrollToTop() {
