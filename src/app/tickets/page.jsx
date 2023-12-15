@@ -18,7 +18,7 @@ import Spinner from "@/components/Spinner";
 
 export default function Home() {
   //metode til at få vist "flere sider" ligesom i matasquizzen
-  const [visible, setVisible] = useState(1);
+  const [visible, setVisible] = useState(6);
   const [spinnerDisplay, setSpinnerDisplay] = useState(true);
   //Denne function tager brugeren til toppen af siden. Funktionen bliver kaldt når der "skiftes side" på siden.
   function scrollToTop() {
@@ -524,9 +524,12 @@ export default function Home() {
       {visible === 6 && (
         <>
           <Spinner spinnerDisplay={spinnerDisplay} />
-          <section className={`${spinnerDisplay && "hidden"}`}>
-            <p className="text-3xl">THANK YOU! YOUR ORDER HAS BEEN RECEIVED</p>
-            <p>YOULL RECEIVE AN EMAIL WITH THE ORDER INFORMATION</p>
+          <section className={`${spinnerDisplay && "hidden"} grid grid-cols-1 mt-28 mb-60`}>
+            <h2 className="text-xxl md:text-5xl place-self-center justify-center text-center">THANK YOU!</h2>
+            <h2 className="text-xxl md:text-5xl place-self-center justify-center text-center">YOUR ORDER HAS BEEN RECEIVED</h2>
+            <p className="text-md md:text-lg place-self-center justify-center text-center mt-6">
+              YOU`LL RECEIVE AN EMAIL <br /> WITH THE ORDER INFORMATION
+            </p>
           </section>
         </>
       )}
