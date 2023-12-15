@@ -28,9 +28,11 @@ export default function FiveTimer() {
   }, [rightNow, minutes, seconds]);
 
   return (
-    <div className="flex gap-2 justify-self-end mb-10">
-      <p className="text-lg md:text-5xl">{minutes} min</p>
-      <p className="text-lg md:text-5xl">{seconds} sec</p>
+    <div className="grid">
+      <div className="flex gap-2 justify-self-end mb-10">
+        <p className="text-lg md:text-3xl">{minutes} min</p>
+        <p className="text-lg md:text-3xl">{seconds} sec</p>
+      </div>
     </div>
   );
 }

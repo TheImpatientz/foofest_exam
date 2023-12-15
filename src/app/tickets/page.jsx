@@ -337,8 +337,13 @@ export default function Home() {
 
   return (
     <Layout current="Tickets">
+      {(visible === 3 || visible === 4 || visible === 5) && (
+        <>
+          <HeaderTwo page="Checkout"></HeaderTwo>
+          <FiveTimer />
+        </>
+      )}
       {visible === 1 && (
-        // className={`${spinnerDisplay ? "block" : "hidden"}`}
         // I denne section har vi ikke noget form-tag, da vi ikke bruger inputfelter på den første "side". Derimod samler vi data i et object, når der klikkes next
         <section className="md:relative">
           <Spinner spinnerDisplay={spinnerDisplay} />
@@ -444,8 +449,6 @@ export default function Home() {
       )}
       {visible === 3 && (
         <section className="md:relative grid">
-          <HeaderTwo page="Checkout"></HeaderTwo>
-          <FiveTimer />
           <h3>CHOOSE A TENT OPTION</h3>
           <form action={validateTent} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
             <div>
@@ -463,8 +466,6 @@ export default function Home() {
       )}
       {visible === 4 && (
         <section className="grid">
-          <HeaderTwo page="Checkout"></HeaderTwo>
-          <FiveTimer />
           <h3>PERSONAL INFORMATION</h3>
 
           <form onSubmit={addPersonalInfo} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
@@ -507,8 +508,6 @@ export default function Home() {
       )}
       {visible === 5 && (
         <section className="grid">
-          <HeaderTwo page="Checkout"></HeaderTwo>
-          <FiveTimer />
           <h3>CHOOSE PAYMENT</h3>
           <form action={validatePayment} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
             <Cardinfo></Cardinfo>
