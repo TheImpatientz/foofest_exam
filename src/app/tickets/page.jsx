@@ -466,9 +466,6 @@ export default function Home() {
           <HeaderTwo page="Checkout"></HeaderTwo>
           <FiveTimer />
           <h3>PERSONAL INFORMATION</h3>
-          {/* collapse-close */}
-          {/* collapse-open */}
-          {/* ${personalFocus ? "collapse-open" : "collapse-close"} */}
 
           <form onSubmit={addPersonalInfo} className="w-full h-fit md:grid md:grid-cols-2 md:gap-8">
             <div>
