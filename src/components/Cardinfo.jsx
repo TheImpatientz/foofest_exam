@@ -38,7 +38,6 @@ export default function Cardinfo() {
 
   //dateLayout sørger for at expiry feltet har et / i midten og skifter fokus til næste felt ved fuld længde
   function dateLayout(e) {
-    console.log("hallo");
     //Sætter / efter tal nummer to
     // if (e.target.value.length === 0) {
     //   e.target.value = e.target.value + "M/YY";
