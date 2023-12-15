@@ -204,7 +204,9 @@ export default function Home() {
     dataObj.telephone = telephone;
 
     // KOMMENTAR //Kalder submitEkstraValues(evt)
-    submitEkstraValues(evt);
+    if (ticketAmount > 1) {
+      submitEkstraValues(evt);
+    }
 
     console.log("dette er objektet", dataObj);
 
@@ -213,21 +215,87 @@ export default function Home() {
     setVisible((o) => o + 1);
   }
 
-  // // KOMMENTAR //Forsøger at opsamle input fra EKSTRA-TICKETS
+  // // KOMMENTAR //Forsøger at opsamle input fra EKSTRA-TICKETS, putter hver ekstra person i et objekt hver, derefter pusher jeg opjekterne ind i et array ekstraPersons.
   function submitEkstraValues(e) {
     e.preventDefault();
-    const formData = new FormData(e.target);
+
+    let ekstraPersons = [];
+
     let firstName_ekstra = e.target.elements.firstname_ekstra;
+    let lastName_ekstra = e.target.elements.lastname_ekstra;
+    let day_ekstra = e.target.elements.day_ekstra;
+    let month_ekstra = e.target.elements.month_ekstra;
+    let year_ekstra = e.target.elements.year_ekstra;
+
     if (!firstName_ekstra.length) {
       firstName_ekstra = [e.target.elements.firstname_ekstra];
+      lastName_ekstra = [e.target.elements.lastname_ekstra];
+      day_ekstra = [e.target.elements.day_ekstra];
+      month_ekstra = [e.target.elements.month_ekstra];
+      year_ekstra = [e.target.elements.year_ekstra];
     }
     firstName_ekstra.forEach((field, index) => {
-      console.log(field.value, firstName_ekstra[index].value);
+      let onePerson = { firstname_ekstra: "", lastname_ekstra: "", day_ekstra: 0, month_ekstra: 0, year_ekstra: 0 };
+      onePerson.firstname_ekstra = field.value;
+      onePerson.lastname_ekstra = lastName_ekstra[index].value;
+      onePerson.day_ekstra = day_ekstra[index].value;
+      onePerson.month_ekstra = month_ekstra[index].value;
+      onePerson.year_ekstra = year_ekstra[index].value;
+
+      ekstraPersons.push(onePerson);
+      dataObj.ekstraPersons = ekstraPersons;
     });
 
-    console.log(formData.get("firstname_ekstra"));
-    console.log(firstName_ekstra.length);
+    console.log("dette er dataObj", dataObj);
   }
+
+  // KOPI// // KOMMENTAR //Forsøger at opsamle input fra EKSTRA-TICKETS
+  // function submitEkstraValues(e) {
+  //   e.preventDefault();
+
+  //   let firstNameArr = [];
+  //   let firstName_ekstra = e.target.elements.firstname_ekstra;
+
+  //   if (!firstName_ekstra.length) {
+  //     firstName_ekstra = [e.target.elements.firstname_ekstra];
+  //   }
+  //   firstName_ekstra.forEach((field) => {
+  //     firstNameArr.push(field.value);
+  //     console.log(firstNameArr);
+  //     dataObj.firstnameEkstra = firstNameArr;
+  //   });
+
+  //   let lastNameArr = [];
+  //   let lastName_ekstra = e.target.elements.lastname_ekstra;
+
+  //   if (!lastName_ekstra.length) {
+  //     lastName_ekstra = [e.target.elements.lastname_ekstra];
+  //   }
+  //   lastName_ekstra.forEach((field) => {
+  //     lastNameArr.push(field.value);
+  //     console.log(lastNameArr);
+  //     dataObj.lastnameEkstra = lastNameArr;
+  //   });
+
+  //   let dayArr = [];
+  //   let day_ekstra = e.target.elements.day_ekstra;
+
+  //   if (!day_ekstra.length) {
+  //     day_ekstra = [e.target.elements.day_ekstra];
+  //   }
+  //   day_ekstra.forEach((field) => {
+  //     dayArr.push(field.value);
+  //     console.log(dayArr);
+  //     dataObj.dayEkstra = dayArr;
+  //   });
+
+  //   console.log("dette er det lækre obj", dataObj);
+
+  //   // console.log("til freja", formData.get("firstname_ekstra"));
+  //   // console.log("formData get", formData.get("firstname_ekstra"));
+  //   // console.log("dette er firstName_ekstra", firstName_ekstra);
+  //   // console.log(firstName_ekstra.length);
+  // }
 
   async function postOrder(data) {
     let headersList = {
@@ -405,7 +473,7 @@ export default function Home() {
                 <div className="collapse-content">
                   <Labelinput id="firstname" inputname="firstname" type="text" label="FIRSTNAME" placeholder="EX. PETER"></Labelinput>
                   <Labelinput id="lastname" inputname="lastname" type="text" label="LASTNAME" placeholder="EX. THOMSON"></Labelinput>
-                  <Dob></Dob>
+                  <Dob day="day" month="month" year="year"></Dob>
                   <Labelinput id="adress" inputname="adress" type="text" label="ADRESS" placeholder="EX. STENSTYKKEVEJ, 62"></Labelinput>
                   <Labelinput id="zipcode" inputname="zipcode" type="text" label="ZIPCODE" placeholder="EX. 2650"></Labelinput>
                   <Labelinput id="city" inputname="city" type="text" label="CITY" placeholder="EX. HVIDOVRE"></Labelinput>
