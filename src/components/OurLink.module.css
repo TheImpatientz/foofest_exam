@@ -2,10 +2,12 @@
 .a {
   display: block;
   position: relative;
-  /*overflow:hidden skjuler stregen før brugeren hover / focus */
+  /*overflow:hidden skjuler stregen før brugeren hover */
   overflow: hidden;
+  height: fit-content;
   width: fit-content;
   /*padding top og buttom til at få nedhængende bogstaver (g) til ikke at blive cuttet af */
+  padding: 0.1em 0;
   margin: 0.2em 0;
 }
 
@@ -15,7 +17,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 1px;
+  height: 2px;
   background-color: var(--secondary-color);
   opacity: 1;
   /* translate3d flytter elementet i (x, y, z) retning */
@@ -35,10 +37,6 @@
   display: none;
   transform: none;
 }
-/* .current_page::after {
-  height: 0px;
-  background-color: transparent;
-} */
 
 .current_page {
   border-bottom: 2px solid var(--primary-color);
