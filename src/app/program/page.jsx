@@ -2,6 +2,7 @@ import HeaderTwo from "@/components/HeaderTwo";
 import Layout from "@/components/Layout";
 import Schedule from "@/components/Schedule";
 import SecondaryButton from "@/components/SecondaryButton";
+export const dynamic = "force-dynamic";
 
 // FETCHER DATA FRA DATABASEN MED SCHEDULE FOR AT TAGE FAT I PROGRAMMET
 export default async function program() {
