@@ -14,7 +14,8 @@ export default function EkstraTicket({ id }) {
       setEkstraFocus(true);
     }
   }
-
+  //className "collapse-open" og "collapse-close" er noget DaisyUI provider.
+  //Der er sat 3 tabindex's. TabIndex=0 betyder: gør det muligt at tab dig til dette element (denne er sat af DaisyUI). TabIndex=-1 betyder: du kan ikke tab til dette element.
   return (
     <div tabIndex={0} onFocus={setFocus} className={`collapse ${ekstraFocus ? "collapse-open" : "collapse-close"} bg-[var(--primary-color)] collapse-arrow border border-[var(--accent-color)] rounded-none mb-4`}>
       <input
